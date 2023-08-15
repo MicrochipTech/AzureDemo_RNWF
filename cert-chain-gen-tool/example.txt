@@ -1,3 +1,0 @@
-> node create_test_cert.js root RootCA
-> node create_test_cert.js intermediate SignerCA RootCA
-> node create_test_cert.js device MyDevice SignerCA

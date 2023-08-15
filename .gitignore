@@ -60,3 +60,5 @@ avr128db48_rnwf02.X/.generated_files
  
 # Backup files
 *.bak
+/avr128db48_rnwf02/avr128db48_rnwf02.X/dist/
+/avr128db48_rnwf02/avr128db48_rnwf02.X/build/
