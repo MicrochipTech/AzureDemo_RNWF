@@ -28,7 +28,7 @@ static uint8_t subCnt;
 void APP_AZURE_BUTTON_Telemetry(uint32_t press_count)
 {            
     snprintf(app_buf, sizeof(app_buf), AZURE_FMT_BUTTON_TEL, press_count);
-    printf("Telemetry ->> buttonEvent count %d\r\n", press_count);
+    printf("[Telemetry] button presses = %d\r\n", press_count);
     APP_MQTT_Publish(AZURE_PUB_TELEMETRY, app_buf);
 }
 
@@ -36,7 +36,7 @@ void APP_AZURE_BUTTON_Telemetry(uint32_t press_count)
 void APP_AZURE_COUNTER_Telemetry(uint32_t counter)
 {            
     snprintf(app_buf, sizeof(app_buf), AZURE_FMT_COUNTER_TEL, counter);
-    printf("Telemetry ->> counter count %d\r\n", counter);
+    printf("[Telemetry] counter = %d\r\n", counter);
     APP_MQTT_Publish(AZURE_PUB_TELEMETRY, app_buf);
 }
 
@@ -181,7 +181,7 @@ void APP_AZURE_SUB_Handler(char *p_str)
                 *end_ptr = '\0';
                 sprintf(app_buf, AZURE_FMT_RATE_PROP, ver_ptr, rate_ptr);
                 g_ReportRate = atoi(rate_ptr) * APP_SYS_TICK_COUNT_1SEC;
-                printf("Report Rate =  %d \r\n", g_ReportRate);
+                printf("Report Rate = %d msec\r\n", g_ReportRate);
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
         }                

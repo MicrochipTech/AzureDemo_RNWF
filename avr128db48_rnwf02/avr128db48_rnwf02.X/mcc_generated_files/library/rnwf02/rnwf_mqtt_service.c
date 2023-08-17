@@ -22,7 +22,6 @@
 
 
 #define MQTT_DPS_TOP_SET_REG        "$dps/registrations/PUT/iotdps-register/?$rid=1"
-//#define MQTT_DPS_MSG_SET_REQ        "{\\\"payload\\\": {\\\"modelId\\\": \\\"dtmi:com:Microchip:AVR128DB48_CNANO;1\\\"}}"
 #define MQTT_DPS_MSG_SET_REQ          "{\\\"payload\\\" : {\\\"modelId\\\" : \\\""AZURE_MODEL_ID"\\\"}}"
 
 
@@ -60,8 +59,9 @@ RNWF_RESULT_t RNWF_MQTT_SRVC_Callback(RNWF_MQTT_EVENT_t event, uint8_t *p_str)
         case RNWF_MQTT_CONNECTED:
         {
             const char sub_topic[] = MQTT_DPS_SUBSCRIBE_TOPIC;
-            DBG_MSG_MQTT("Azure Central Connection Successful!\r\n");
-            DBG_MSG_MQTT("Performing Device Provisioning Service(DPS)...\r\n");
+            //DBG_MSG_MQTT("Azure Central Connection Successful!\r\n");
+            //DBG_MSG_MQTT("Performing Device Provisioning Service(DPS)...\r\n");
+            printf("Connection to DPS server successful!\n");
             RNWF_MQTT_SrvCtrl(RNWF_MQTT_SUBSCRIBE_QOS0, (void *)sub_topic);             
         }
         break;

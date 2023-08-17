@@ -86,15 +86,18 @@ RNWF_MQTT_CFG_t mqtt_cfg = {
 
 
 /**TLS Configuration for the Azure */
-const char *tls_cfg_azure[] = {"DigiCertGlobalRootG2", AZURE_DEVICE_ID, AZURE_DEVICE_ID, NULL, NULL};
-                       
+//const char *tls_cfg_azure[] = {"DigiCertGlobalRootG2", AZURE_DEVICE_ID, AZURE_DEVICE_ID, NULL, NULL};
+const char *tls_cfg_dps[] = {"BaltimoreCyberTrustRoot", AZURE_DEVICE_ID, AZURE_DEVICE_ID, NULL, NULL};
+const char *tls_cfg_hub[] = {"DigiCertGlobalRootG2", AZURE_DEVICE_ID, AZURE_DEVICE_ID, NULL, NULL};
+
 RNWF_MQTT_CFG_t mqtt_cfg = {
-    .url = "g2-cert-dps.azure-devices-provisioning.net",
+    //.url = "g2-cert-dps.azure-devices-provisioning.net",
+    .url = "global.azure-devices-provisioning.net",
     .username = AZURE_SCOPE_ID"/registrations/"AZURE_DEVICE_ID"/api-version=2019-03-31",    
     .clientid = AZURE_DEVICE_ID,    
     .password = "",
     .port = 8883,
-    .tls_conf = tls_cfg_azure,
+    .tls_conf = tls_cfg_dps,
     .tls_idx = RNWF_NET_TLS_CONFIG_1,  
     .azure_dps = AZURE_DPS_ENABLE
 };
@@ -167,6 +170,15 @@ void APP_LED_Handler(void)
     LED_Toggle();    
 }
 
+void MQTT_DPS_connectParams(void)
+{
+    printf("ID Scope=%s, ", AZURE_SCOPE_ID);
+    printf("Endpoint=%s, ", mqtt_cfg.url);
+    printf("Port=%d, ", mqtt_cfg.port);
+    printf("Client ID=%s, ", mqtt_cfg.clientid);
+    printf("Username=%s\n", mqtt_cfg.username);              
+}
+
 RNWF_RESULT_t APP_MQTT_Publish(const char *top, const char *msg)
 {    
     RNWF_MQTT_FRAME_t mqtt_pub;    
@@ -214,7 +226,12 @@ RNWF_RESULT_t APP_MQTT_Callback(RNWF_MQTT_EVENT_t event, uint8_t *p_str)
         {
             if(*p_str == 1)
             {
-                printf("DPS Successful! Connecting to Azure IoT Hub\r\n");
+                printf("Device provisioning successful!\n");
+                printf("Connecting to Azure IoT Hub using [DigiCert Global Root G2] for server authentication...\r\n");
+                /* Added by RW 8-15-23: Use DigiCert G2 for IoT Hub connection */
+                RNWF_NET_SOCK_SrvCtrl(RNWF_NET_TLS_CONFIG_1, tls_cfg_hub);
+                RNWF_SYSTEM_SrvCtrl(RNWF_SYSTEM_GET_MQTT_INFO, app_buf);
+                printf("%s\n", app_buf);
             }
             else
             {   
@@ -230,7 +247,6 @@ RNWF_RESULT_t APP_MQTT_Callback(RNWF_MQTT_EVENT_t event, uint8_t *p_str)
     return RNWF_PASS;
 }
 
-
 void APP_WIFI_Callback(RNWF_WIFI_EVENT_t event, uint8_t *p_str)
 {       
     switch(event)
@@ -241,7 +257,8 @@ void APP_WIFI_Callback(RNWF_WIFI_EVENT_t event, uint8_t *p_str)
             {            
                 printf("SNTP UP:%s\n", &p_str[2]);  
                 TCA1_Interface.PeriodCountSet(APP_LED_TCA1_PER_TICK<<1);                
-                printf("Connecting to the Cloud\r\n");
+                printf("Contacting the Device Provisioning Service (DPS) using [Baltimore CyberTrust Root] for server authentication...\r\n");
+                MQTT_DPS_connectParams();
                 RNWF_MQTT_SrvCtrl(RNWF_MQTT_SET_CALLBACK, APP_MQTT_Callback);
                 RNWF_MQTT_SrvCtrl(RNWF_MQTT_CONFIG, (void *)&mqtt_cfg);
                 RNWF_MQTT_SrvCtrl(RNWF_MQTT_CONNECT, NULL);
@@ -251,7 +268,7 @@ void APP_WIFI_Callback(RNWF_WIFI_EVENT_t event, uint8_t *p_str)
         break;
         case RNWF_CONNECTED:
         {
-            printf("Wi-Fi Connected\n");  
+            printf("Wi-Fi Connected!\n");  
             
         }    
         break;
@@ -259,7 +276,7 @@ void APP_WIFI_Callback(RNWF_WIFI_EVENT_t event, uint8_t *p_str)
             g_AppState = APP_WIFI_DOWN;
             TCA1_Interface.PeriodCountSet(APP_LED_TCA1_PER_TICK);
             TCA1_Interface.Start();
-            printf("Wi-Fi Disconnected\nReconnecting... \n");
+            printf("Wi-Fi Disconnected!\nReconnecting... \n");
             RNWF_WIFI_SrvCtrl(RNWF_STA_CONNECT, NULL);
             break;
         case RNWF_DHCP_DONE:
@@ -288,9 +305,10 @@ int main(void)
     TCA0_Interface.TimeoutCallbackRegister(APP_SYS_Tick);     
     TCA1_Interface.TimeoutCallbackRegister(APP_LED_Handler); 
             
-    printf("%s", "##################################\n");
-    printf("%s", "  Welcome RNWF02 Basic Cloud Demo  \n");
-    printf("%s", "##################################\n");
+    printf("\n");
+    printf("%s", "#################################\n");
+    printf("%s", "   AVR128DB48+RNWF02 Azure Demo   \n");
+    printf("%s", "#################################\n");
         
     RNWF_IF_Init(); 
     
@@ -316,7 +334,7 @@ int main(void)
     /* RNWF Application Callback register */
     RNWF_WIFI_SrvCtrl(RNWF_WIFI_SET_CALLBACK, APP_WIFI_Callback);
                 
-    /* Wi-Fii Connectivity */
+    /* Wi-Fi Connectivity */
     RNWF_WIFI_PARAM_t wifi_sta_cfg = {RNWF_WIFI_MODE_STA, HOME_AP_SSID, HOME_AP_PASSPHRASE, HOME_AP_SECURITY, 1};        
     RNWF_WIFI_SrvCtrl(RNWF_SET_WIFI_PARAMS, &wifi_sta_cfg);
             

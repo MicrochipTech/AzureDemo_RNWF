@@ -34,7 +34,8 @@
 
 #define AZURE_DEVICE_ID         "azure_dev_03"
 #define AZURE_MODEL_ID          "dtmi:com:Microchip:AVR128DB48_CNANO;1"
-#define AZURE_SCOPE_ID          "0ne00AAE0D0"//"0ne009FA8C7"
+//#define AZURE_SCOPE_ID          "0ne00AAE0D0"
+#define AZURE_SCOPE_ID          "0ne000FFA42"
 #define AZURE_DPS_ENABLE        1
 
 #define AZURE_PUB_TELEMETRY     "devices/"AZURE_DEVICE_ID"/messages/events/"

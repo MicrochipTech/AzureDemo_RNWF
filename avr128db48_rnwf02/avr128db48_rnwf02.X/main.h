@@ -44,8 +44,10 @@
 
 
 /* Wi-Fi Configuration */
-#define HOME_AP_SSID        "NETGEAR51"
-#define HOME_AP_PASSPHRASE  "melodicship232"
+//#define HOME_AP_SSID        "NETGEAR51"
+//#define HOME_AP_PASSPHRASE  "melodicship232"
+#define HOME_AP_SSID        "Verizon-SM-G965U-D1FB"
+#define HOME_AP_PASSPHRASE  "dtpl684$"
 #define HOME_AP_SECURITY    RNWF_WPA2
 
 #define AZURE_CLOUD     1
