@@ -52,7 +52,7 @@ This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation 
 Create a clone of this repository using the [Git](https://git-scm.com) tool in a command line window
 
 ```bash
-git clone https://github.com/MicrochipTech/AzureDemo_AVR128DB48
+git clone https://github.com/MicrochipTech/AzureDemo_RNWF
 ```
 
 As an alternative, scroll up towards the top of this page, click on the **Code** button, and download a ZIP file of this repository
@@ -77,7 +77,7 @@ Click [here](https://learn.microsoft.com/en-us/azure/iot-hub/tutorial-x509-test-
 
     <img src=".//media/MyDevice_Files.png" width=600/>
 
-* Connect the RNWF02PC Add On Board to the PC using a Type C USB cable. The installation files for the utility is located in this [sub-folder](./cert-key-flash-tool/sendTo_tool/). Click [here](Cert-Key-Flash-Tool.md) and follow the directions for using the utility to program the device's certificate & key files into the RNWF02PC module.
+* The installation files for the utility is located in this [sub-folder](./cert-key-flash-tool/sendTo_tool/). Click [here](Cert-Key-Flash-Tool.md) and follow the directions for using the utility to program the device's certificate & key files into the RNWF02PC module.
 
 ### Step 3 - Create an Azure IoT Central Application
 

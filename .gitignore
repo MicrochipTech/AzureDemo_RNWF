@@ -28,7 +28,7 @@
 *.dylib
 
 # Executables
-*.exe
+# *.exe
 *.out
 *.app
 *.i*86
@@ -42,7 +42,7 @@
 
 # Kernel Module Compile Results
 *.mod*
-*.cmd
+# *.cmd
 .tmp_versions/
 modules.order
 Module.symvers
