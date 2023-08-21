@@ -6,6 +6,8 @@ This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation 
 
 ## Hardware Requirements
 
+* [USB-to-UART Serial Adapter/Bridge/Converter](https://www.newark.com/c/cable-wire-cable-assemblies/cable-assemblies/usb-adapter-cables?conversion-type=usb-to-uart-converter)
+
 * [AVR128DB48 Curiosity Nano Evaluation Kit](https://www.microchip.com/en-us/development-tool/ev35l43a)
 
     <img src=".//media/avr128db48_cnano.png" width=500/>
@@ -20,17 +22,17 @@ This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation 
 
 ## Hardware Installation
 
-1. Install the AVR128DB48 Evaluation Kit & RNWF02PC Add On Board onto the Curiosity Nano Adapter base board as shown
-
-    <img src=".//media/AVR128DB48_RNWF02PC.png" width=500/>
-
-2. Confirm that there is a jumper which is shorting the two pins closest to the RNWF02PC module
+1. Confirm that there is a jumper which is shorting the two pins closest to the RNWF02PC module
 
     <img src=".//media/RNWF02_Power_USB.png" width=500/>
 
-3. Use a USB Type-C cable to connect the RNWF02PC Add On Board directly to one of your PC's standard USB ports
+2. Provide power to the RNWF02PC Add On Board by connecting a USB Type-C cable to a +5V DC power source (e.g. USB port or wall adapter)
 
     <img src=".//media/PC_to_RNWF02.png" width=500/>
+
+3. Connect the [USB-to-UART converter](https://www.newark.com/c/cable-wire-cable-assemblies/cable-assemblies/usb-adapter-cables?conversion-type=usb-to-uart-converter) between the PC and the TX/RX pins of the mikroBUS™ header on the RNWF02PC Add On Board:
+
+    <img src=".//media/USB-UART_mikroBUS.png" width=500/>
 
 ## Software Prerequisites & Installation
 
@@ -106,11 +108,15 @@ NOTE: You can access any of your IoT Central applications in the future by acces
 
 ## Test Device Interaction with the Cloud Application
 
-1. Use a micro-USB cable to connect the AVR128DB48 board directly to one of your PC's standard USB ports
+1. Install the AVR128DB48 Evaluation Kit & RNWF02PC Add On Board onto the Curiosity Nano Adapter base board as shown
+
+    <img src=".//media/AVR128DB48_RNWF02PC.png" width=500/>
+
+2. Use a micro-USB cable to connect the AVR128DB48 board directly to one of your PC's standard USB ports
 
     <img src=".//media/PC_to_AVR128DB48.png" width=500/>
 
-2. Launch a [Terminal Emulator](https://en.wikipedia.org/wiki/List_of_terminal_emulators) program of your choice and connect to the AVR128DB48 Curiosity Nano's Virtual COM Port at 115200 baud.
+3. Launch a [Terminal Emulator](https://en.wikipedia.org/wiki/List_of_terminal_emulators) program of your choice and connect to the AVR128DB48 Curiosity Nano's Virtual COM Port at 115200 baud.
 
     - Windows users: The correct one to select will most likely be the one that shows up as a Virtual COM Port
 
@@ -120,11 +126,11 @@ NOTE: You can access any of your IoT Central applications in the future by acces
 
         <img src=".//media/image17b.png" width=200 />
 
-3. Launch the `MPLAB X` IDE (this tool should have been previously installed and most likely resides in the \Program Files\Microchip\ folder. Once the MPLAB X IDE has finished its initialization routines, you should notice the "Kit Window" that acknowledges an active connection to the AVR128DB48 Curiosity Nano Evaluation Kit
+4. Launch the `MPLAB X` IDE (this tool should have been previously installed and most likely resides in the \Program Files\Microchip\ folder. Once the MPLAB X IDE has finished its initialization routines, you should notice the "Kit Window" that acknowledges an active connection to the AVR128DB48 Curiosity Nano Evaluation Kit
 
     <img src=".//media/image18b.png"  />
 
-4. Navigate to the main toolbar's `File` > `Open Project` operation to load the demo project folder (\*.X) located at `\AzureDemo_RNWF\avr128db48_rnwf02\avr128db48_rnwf02.X`
+5. Navigate to the main toolbar's `File` > `Open Project` operation to load the demo project folder (\*.X) located at `\AzureDemo_RNWF\avr128db48_rnwf02\avr128db48_rnwf02.X`
 
     <img src=".//media/image19a.png" width=200 />
     <img src=".//media/image19b.png" width=400 />
@@ -133,30 +139,30 @@ NOTE: You can access any of your IoT Central applications in the future by acces
 
     <img src=".//media/image21a.png" width=500 />
 
-5. Set the `avr128db48_rnwf02` project as the main (currently focused/active) project by right-clicking on it and selecting `Set as Main Project`
+6. Set the `avr128db48_rnwf02` project as the main (currently focused/active) project by right-clicking on it and selecting `Set as Main Project`
 
     <img src=".//media/image40.png" width=300 />
 
-6. In the `Projects` window, open the `main.h` header file by double-clicking directly on the file name
+7. In the `Projects` window, open the `main.h` header file by double-clicking directly on the file name
 
     <img src=".//media/image22.png" width=200 />
 
-7. In the `main.h` header file, set the necessary parameters corresponding to your Wi-Fi Access Point
+8. In the `main.h` header file, set the necessary parameters corresponding to your Wi-Fi Access Point
     - `HOME_AP_SSID` (name of your Wi-Fi Access Point)
     - `HOME_AP_PASSPHRASE` (password for your Wi-Fi Access Point)
 
-8. In the `Projects` window, open the `azure_pnp.h` header file by double-clicking directly on the file name
+9. In the `Projects` window, open the `azure_pnp.h` header file by double-clicking directly on the file name
 
     <img src=".//media/image22a.png" width=200 />
 
-9. In the `azure_pnp.h` header file, set the parameters corresponding to your IoT device
+10. In the `azure_pnp.h` header file, set the parameters corresponding to your IoT device
 
     - `AZURE_DEVICE_ID` (confirm this matches the Common Name (CN) used in the device/client certificate)
     - `AZURE_ID_SCOPE` (look up the ID scope for your IoT Central application by using the left-hand navigation pane [Security -> Permissions -> Device connection groups])
 
         <img src="./media/ID_Scope_LookUp.png" alt="Script Configuration" width = 500/>
 
-10. Verify the project properties are set correctly before building the project by executing the following steps:
+11. Verify the project properties are set correctly before building the project by executing the following steps:
 
     - right-click on the `avr128db48_rnwf02` project
     - select `Properties`
@@ -169,36 +175,36 @@ NOTE: You can access any of your IoT Central applications in the future by acces
 
         **Note** If any changes were made in the project properties window, the `Apply` button should become enabled.  Make sure to hit the `Apply` button before hitting `OK`
 
-11. Right-click on the active project and select `Clean`. Right-click the project again and select `Make and Program Device`. This operation will automatically build the project before attempting to program the target device.
+12. Right-click on the active project and select `Clean`. Right-click the project again and select `Make and Program Device`. This operation will automatically build the project before attempting to program the target device.
 
-12. After the `BUILD SUCCESSFUL` message appears in the Output window, the application HEX file will be programmed onto the development Board. Once programming has finished, the board will automatically reset and start running its application code.
+13. After the `BUILD SUCCESSFUL` message appears in the Output window, the application HEX file will be programmed onto the development Board. Once programming has finished, the board will automatically reset and start running its application code.
 
-13. Observe the debug messages that are being continuously output to the terminal window.
+14. Observe the debug messages that are being continuously output to the terminal window.
 
-14. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
+15. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
 
-15. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
+16. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
 
-16. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
+17. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
 
     <img src=".//media/image89.png" width=800 />
 
-17. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
+18. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
 
     <img src=".//media/image90.png" width=800 />
 
-18. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
+19. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
 
     <img src=".//media/image91.png" width=800 />
 
     Try changing the state of the `LED0` to switch between the Off, On, and Blinking modes. The Telemetry Reporting Rate can also be adjusted to change the period (in seconds) for sending the continuous telemetry reports.
 
-19. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
+20. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
 
     <img src=".//media/image92.png" width=400 />
     <img src=".//media/image93.png" width=250 />
 
-20. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
+21. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
 
     <img src=".//media/image94.png" width=400 />
     <img src=".//media/image95.png" width=200 />
