@@ -86,12 +86,12 @@ RNWF_MQTT_CFG_t mqtt_cfg = {
 
 
 /**TLS Configuration for the Azure */
-//const char *tls_cfg_azure[] = {"DigiCertGlobalRootG2", AZURE_DEVICE_ID, AZURE_DEVICE_ID, NULL, NULL};
-const char *tls_cfg_dps[] = {"BaltimoreCyberTrustRoot", AZURE_DEVICE_ID, AZURE_DEVICE_ID, NULL, NULL};
-const char *tls_cfg_hub[] = {"DigiCertGlobalRootG2", AZURE_DEVICE_ID, AZURE_DEVICE_ID, NULL, NULL};
+#define DEVICE_FILENAME_CERT "myDevice_cert"
+#define DEVICE_FILENAME_KEY  "myDevice_key"
+const char *tls_cfg_dps[] = {"BaltimoreCyberTrustRoot", DEVICE_FILENAME_CERT, DEVICE_FILENAME_KEY, NULL, NULL};
+const char *tls_cfg_hub[] = {"DigiCertGlobalRootG2", DEVICE_FILENAME_CERT, DEVICE_FILENAME_KEY, NULL, NULL};
 
 RNWF_MQTT_CFG_t mqtt_cfg = {
-    //.url = "g2-cert-dps.azure-devices-provisioning.net",
     .url = "global.azure-devices-provisioning.net",
     .username = AZURE_SCOPE_ID"/registrations/"AZURE_DEVICE_ID"/api-version=2019-03-31",    
     .clientid = AZURE_DEVICE_ID,    
