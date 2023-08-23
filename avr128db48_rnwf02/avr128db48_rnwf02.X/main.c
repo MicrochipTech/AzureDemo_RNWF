@@ -86,8 +86,8 @@ RNWF_MQTT_CFG_t mqtt_cfg = {
 
 
 /**TLS Configuration for the Azure */
-#define DEVICE_FILENAME_CERT "myDevice_cert"
-#define DEVICE_FILENAME_KEY  "myDevice_key"
+#define DEVICE_FILENAME_CERT AZURE_DEVICE_ID
+#define DEVICE_FILENAME_KEY  AZURE_DEVICE_ID
 const char *tls_cfg_dps[] = {"BaltimoreCyberTrustRoot", DEVICE_FILENAME_CERT, DEVICE_FILENAME_KEY, NULL, NULL};
 const char *tls_cfg_hub[] = {"DigiCertGlobalRootG2", DEVICE_FILENAME_CERT, DEVICE_FILENAME_KEY, NULL, NULL};
 

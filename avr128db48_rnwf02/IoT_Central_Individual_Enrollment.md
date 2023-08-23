@@ -3,8 +3,7 @@
 1. Select the Devices menu, and click the "+ New" button
 <img src="./media/CreateNewDeviceButton.png" alt="A screenshot of a new Device button" />
 
-2. Use the device certificate common name for the Device ID
-*OpenSSL* was used previously to read the certificate common name from the PEM file.  Use the common name for the *Device ID* field. This pairing is how the certificate is matched to the device during registration. The *Device name* can be changed to a friendly name, or left the same as the *Device ID*.
+2. Use the device certificate Common Name for the Device ID  (e.g. `MyDevice` that is used in the example chain of trust). This pairing is how the certificate is matched to the device during registration. The *Device name* can be changed to a friendly name, or left the same as the *Device ID*.
 
     <img src="./media/CreateNewDevice.png" alt="A screenshot of a new Device Dialog" width = 550/>
 
@@ -22,9 +21,9 @@ The Connect button will open the device connection dialog.  Several items are ac
 
 6. Select the *Authentication method* as "Certificates (X.509)"
 
-7. Select the file folder icon for the Primary certificate, upload your device PEM file (e.g. *`<"COMMON_NAME">.PEM`*).
+7. Select the file folder icon for the Primary certificate and upload your device certificate PEM file  (e.g. `myDevice_cert.pem` that is provided in the example chain of trust).
 
-8. Select the file folder icon for the Secondary certificate, upload your device PEM file (e.g. *`<"COMMON_NAME">.PEM`*). Both the primary and secondary certificate have to be selected to save the setting, which is why the same PEM file is uploaded twice.
+8. Select the file folder icon for the Secondary certificate, and upload the same PEM file used for the Primary. Both the Primary and Secondary certificates have to be uploaded to save the Device connection group settings, which is why the same PEM file is uploaded twice.
 
 9. Note the *`ID scope`* at the top of the dialog.  This is used when we configure the device to connect to Azure.
 
