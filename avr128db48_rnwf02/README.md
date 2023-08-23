@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation Kit to a cloud application running on Microsoft's Azure IoT Central platform. Secure connections are made possible by using Certificate Authority signed X.509 certificate authentication between the Azure server and client (a.k.a. "device"). Wireless connectivity to the cloud is made possible by connecting Microchip's RNWF02PC module to one of the AVR128DB48's standard UART ports to serve an easy-to-use, serial-to-cloud bridge using AT commands.
+This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation Kit to a cloud application running on Microsoft's Azure IoT Central platform. Secure connections are made possible by using Certificate Authority (CA) signed X.509 certificate authentication between the Azure server and client (a.k.a. "device"). Wireless connectivity to the cloud is made possible by connecting Microchip's RNWF02PC module to one of the AVR128DB48's standard UART ports to serve an easy-to-use, serial-to-cloud bridge using AT commands.
 
 ## Hardware Requirements
 
@@ -24,17 +24,21 @@ This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation 
 
 ## Hardware Preparation
 
-1. Confirm that there is a jumper which is shorting the two pins closest to the RNWF02PC module
+1. Install a jumper to short the two pins closest to the RNWF02PC module.
 
     <img src=".//media/RNWF02_Power_USB.png" width=500/>
 
-2. Provide power to the RNWF02PC Add On Board by connecting a USB Type-C cable to a +5V DC power source (e.g. USB port or wall adapter)
+2. Provide dedicated power to the RNWF02PC Add On Board by connecting a USB Type-C cable to a +5V DC power source that's preferably not a USB port/hub (e.g. USB wall charger).
 
-    <img src=".//media/PC_to_RNWF02.png" width=500/>
+    <img src=".//media/DC_Supply_RNWF02.png" width=500/>
 
-3. Connect the USB-to-UART converter's RXD, TXD, & GND wires to the the TX, RX, & GND pins of the RNWF02PC Add On Board, respectively:
+3. Connect the USB-to-UART converter's RXD, TXD, & GND wires to the the TX, RX, & GND pins of the RNWF02PC Add On Board, respectively.
 
     <img src=".//media/USB-UART_mikroBUS.png" width=500/>
+
+4. Connect the USB end of the USB-to-UART serial converter cable to one of the PC's standard USB ports. This is how the PC will communicate with the RNWF02PC module for provisioning purposes.
+
+    <img src=".//media/PC_to_USB-UART.png" width=300/>
 
 ## Software Prerequisites & Installation
 
@@ -82,13 +86,13 @@ A Python script has been provided to help you easily program the device's certif
 
 * <img src=".//media/MyDevice_Files.png" width=600/>
 
-* Open a `Command Prompt` window and use the command line to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory. Execute the following command to install the Python packages required for executing the script:
+* Open a `Command Prompt` window and use the command line to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory. Execute the following command to install the Python packages required for executing the script (if `pip` is an unrecognized command, try using `pip3`):
 
     ```bash
     pip install -r requirements.txt
     ```
 
-* Execute the following command to get a list of all the **certificates** that are currently programmed in the RNWF02PC module:
+* Execute the following command to get a list of all the **certificates** that are currently programmed in the RNWF02PC module (if `python` is an unrecognized command, try using `python3` or `py -3`):
 
     ```bash
     python file_transfer.py list cert
@@ -100,7 +104,7 @@ A Python script has been provided to help you easily program the device's certif
     python file_transfer.py load cert -f "MyDevice" -p "../../cert-chain-gen-tool/myDevice_cert.pem"
     ```
 
-* Execute the following command to get a list of all the **keys** that are currently programmed in the RNWF02PC module:
+* Execute the following command to get a list of all the **keys** that are currently programmed in the RNWF02PC module  (if `python` is an unrecognized command, try using `python3` or `py -3`):
 
     ```bash
     python file_transfer.py list key
@@ -119,7 +123,7 @@ A Python script has been provided to help you easily program the device's certif
     python file_transfer.py delete key -f "<KEY_NAME>"
     ```
 
-* Upon successful completion of uploading the device certificate & key files into the RNWF02PC module, the USB-to-UART converter can now be disconnected from the RNWF02PC Add On Board. Keep the RNWF02PC Add On Board powered on via the USB Type-C cable.
+* Upon successful completion of uploading the device certificate & key files into the RNWF02PC module, the USB-to-UART converter can now be disconnected from the PC & RNWF02PC Add On Board. Keep the RNWF02PC Add On Board powered on via the USB Type-C cable.
 
 ### Step 3 - Create an Azure IoT Central Application
 
@@ -221,7 +225,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 13. After the `BUILD SUCCESSFUL` message appears in the Output window, the application HEX file will be programmed onto the development Board. Once programming has finished, the board will automatically reset and start running its application code.
 
-14. Observe the debug messages that are being continuously output to the terminal window. The connection to Azure IoT Central is successful if telemetry messages are being continuously output to the terminal window. If the program appears to stall, you can hold down the `SW0` button on the AVR128DB48 Curiosity Nano board for approximately 4 seconds and then release the button to trigger a software reset. It may also be necessary to cycle power to the RNWF02PC Add On Board before resetting the AVR128DB48 Curiosity Nano board.
+14. Observe the debug messages that are being continuously output to the terminal window. The connection to Azure IoT Central is successful if telemetry messages are being continuously output to the terminal window. If the program appears to stall during the connection process, you can hold down the `SW0` user button on the AVR128DB48 Curiosity Nano board for approximately 4 seconds and then release the button to trigger a software reset. It may also be necessary to cycle power to the RNWF02PC Add On Board before resetting the AVR128DB48 Curiosity Nano board.
 
     <img src=".//media/Terminal_Output.png" width=700/>
 
@@ -266,7 +270,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
     <img src=".//media/RNWF02_Power_VCC.png" width=500/>
 
-    Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for approximately 4 seconds and then releasing it. Hopefully the connection is still successful as shown in the following example terminal output!
+    Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for approximately 4 seconds and then releasing it. Hopefully the connection process repeats successfully as shown in the following example terminal output!
 
     <img src=".//media/Terminal_Output.png" width=700/>
 
