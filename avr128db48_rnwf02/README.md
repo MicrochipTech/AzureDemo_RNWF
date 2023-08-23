@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation Kit to a cloud application running on Microsoft's Azure IoT Central platform. Secure connections are made possible by using Certificate Authority signed X.509 certificate authentication between the Azure server and client (a.k.a. "device"). Wireless connectivity to the cloud is made possible by connecting Microchip's RNWF02PC module to one of the AVR128DB48's standard UART ports to serve an easy-to-use, serial-to-cloud bridge.
+This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation Kit to a cloud application running on Microsoft's Azure IoT Central platform. Secure connections are made possible by using Certificate Authority signed X.509 certificate authentication between the Azure server and client (a.k.a. "device"). Wireless connectivity to the cloud is made possible by connecting Microchip's RNWF02PC module to one of the AVR128DB48's standard UART ports to serve an easy-to-use, serial-to-cloud bridge using AT commands.
 
 ## Hardware Requirements
 
@@ -32,7 +32,7 @@ This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation 
 
     <img src=".//media/PC_to_RNWF02.png" width=500/>
 
-3. Connect the [USB-to-UART converter](https://www.newark.com/c/cable-wire-cable-assemblies/cable-assemblies/usb-adapter-cables?conversion-type=usb-to-uart-converter) RXD, TXD, & GND wires to the the TX, RX, & GND pins of the mikroBUS™ header on the RNWF02PC Add On Board, respectively:
+3. Connect the USB-to-UART converter's RXD, TXD, & GND wires to the the TX, RX, & GND pins of the RNWF02PC Add On Board, respectively:
 
     <img src=".//media/USB-UART_mikroBUS.png" width=500/>
 
@@ -50,7 +50,7 @@ This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation 
         NOTE: This demonstration project was last tested successfully with XC8 v2.41, and in general should work with later versions of the compiler as they become available. If you encounter issues building the project with a newer version of the compiler, it is recommended to download the last known working version from the [MPLAB Development Ecosystem Downloads Archive](https://www.microchip.com/en-us/tools-resources/archives/mplab-ecosystem) (to fall back to the version Microchip successfully tested prior to release). 
 
 
-## Create Chain of Trust and Cloud Application
+## Device Provisioning & Cloud Resources Setup
 
 ### Step 1 - Clone this Repository
 
@@ -68,58 +68,58 @@ As an alternative, scroll up towards the top of this page, click on the **Code**
 
 For secure connections, a chain of trust (which includes certificates & keys for the root, signer, and client) needs to be generated and programmed into the RNWF02PC module.
 
-The client certificate file will be needed when we create the device in Azure IoT Central using the individual enrollment method. Another option is to use the group enrollment method which requires uploading the signer certificate file (or in some cases, could be the root certificate if the client certificate is chained directly to it) to the Azure IoT Central application, so that any device which presents a leaf certificate that was derived from the signer (or root) certificate will automatically be granted access to registration.
+The client certificate file will be needed when we create the device in Azure IoT Central using the individual enrollment method. Another option is to use the group enrollment method which requires uploading the signer certificate file (or in some cases, could be the root certificate if the client certificate is chained directly to the Root CA) to the Azure IoT Central application, so that any device which presents a leaf certificate that was derived from the signer (or root) certificate will automatically be granted access to registration (which is governed by the Device Provisioning Service linked to the IoT Hub that's used by an IoT Central application).
 
 NOTE: For evaluation purposes, an example chain of trust has been provided in this [sub-folder](./cert-chain-gen-tool/). If you are not interested in going through the detailed steps of creating your own chain of trust at this time, feel free to jump directly to Step 2.2 below to use the provided set of example files.
 
 #### 2.1 Generate the files for your certificates & keys
 
-Click [here](./cert-chain-gen-scripts/) and follow the instructions to use Git Bash shell scripts to generate your chain of trust. During execution of the scripts, you will be asked to provide names for the Root CA, Signer (Subordinate/Intermediate) CA, and the Common Name (CN) for the device. The Common Name for the device will be used as the registration ID when connecting to the Azure IoT Central's Device Provisioning Service (DPS).
+Click [here](./cert-chain-gen-scripts/) and follow the instructions to use GitBash shell scripts to generate your chain of trust. During execution of the scripts, you will be asked to provide names for the Root CA, Signer (Subordinate/Intermediate) CA, and the Common Name (CN) for the device. The Common Name for the device will be used as the registration ID when connecting to the Azure IoT Central's Device Provisioning Service (DPS).
 
-#### 2.2 Upload the Device's Client Certificate & Private Key into the RNWF02PC Module
+#### 2.2 Upload Device Certificate & Key into the RNWF02PC Module
 
-A Python script has been provided to help you easily program the device's certificate & key files into the RNWF02PC module. If you are using the pre-existing default chain of trust that has been provided in this example, you will just need to program the `myDevice_cert.pem` & `myDevice_key.pem` files that are located in this [sub-folder](./cert-chain-gen-tool/). Note that the Common Name (CN) for the provided device certificate is "MyDevice" - which means the Device ID will correspond to this Common Name (CN) for registration/identification purposes in Azure.
+A Python script has been provided to help you easily program the device's certificate & key files into the RNWF02PC module. If you are using the pre-existing default chain of trust that has been provided in this example, you will just need to program the `myDevice_cert.pem` & `myDevice_key.pem` files that are located in this [sub-folder](./cert-chain-gen-tool/). Please note that the Common Name (CN) for the provided device certificate is "MyDevice" - which means the Device ID will correspond to this Common Name (CN) for registration/identification purposes in Azure.
 
 * <img src=".//media/MyDevice_Files.png" width=600/>
 
-* Open a `Command Prompt` window and use the command line to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory. Execute the following command to install the Python packages required by the scripting tool:
+* Open a `Command Prompt` window and use the command line to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory. Execute the following command to install the Python packages required for executing the script:
 
     ```bash
-    pip3 install -r requirements.txt
+    pip install -r requirements.txt
     ```
 
-* Execute the following command to get a list of all the **certificates** that are currently programmed in the RNWF02PC module
+* Execute the following command to get a list of all the **certificates** that are currently programmed in the RNWF02PC module:
 
     ```bash
-    python3 file_transfer.py list cert
+    python file_transfer.py list cert
     ```
 
 * Load the device **certificate** file (e.g. `myDevice_cert.pem`) into the RNWF02PC module by executing the following command line (use the Common Name (e.g. `MyDevice`)  as the name of the **certificate** file stored in the module):
 
     ```bash
-    python3 file_transfer.py load cert -f "MyDevice" -p "../../cert-chain-gen-tool/myDevice_cert.pem"
+    python file_transfer.py load cert -f "MyDevice" -p "../../cert-chain-gen-tool/myDevice_cert.pem"
     ```
 
-* Execute the following command to get a list of all the **keys** that are currently programmed in the RNWF02PC module
+* Execute the following command to get a list of all the **keys** that are currently programmed in the RNWF02PC module:
 
     ```bash
-    python3 file_transfer.py list key
+    python file_transfer.py list key
     ```
 
 * Load the device **key** file (e.g. `myDevice_key.pem`) into the RNWF02PC module by executing the following command line (use the Common Name (e.g. `MyDevice`) as the name of the **key** file stored in the module):
 
     ```bash
-    python3 file_transfer.py load key -f "MyDevice" -p "../../cert-chain-gen-tool/myDevice_key.pem"
+    python file_transfer.py load key -f "MyDevice" -p "../../cert-chain-gen-tool/myDevice_key.pem"
     ```
 
 * If needed, you can delete certificates and/or keys from the RNWF02PC module by executing the following commands:
 
     ```bash
-    python3 file_transfer.py delete cert -f "<CERT_NAME>"
-    python3 file_transfer.py delete key -f "<KEY_NAME>"
+    python file_transfer.py delete cert -f "<CERTIFICATE_NAME>"
+    python file_transfer.py delete key -f "<KEY_NAME>"
     ```
 
-* Upon successful completion of uploading the device certificate & key files to the RNWF02PC module, the USB-to-UART converter can now be disconnected from the RNWF02PC Add On Board. Keep the RNWF02PC Add On Board powered on via the USB Type-C cable.
+* Upon successful completion of uploading the device certificate & key files into the RNWF02PC module, the USB-to-UART converter can now be disconnected from the RNWF02PC Add On Board. Keep the RNWF02PC Add On Board powered on via the USB Type-C cable.
 
 ### Step 3 - Create an Azure IoT Central Application
 
@@ -152,7 +152,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
     <img src=".//media/AVR128DB48_RNWF02PC.png" width=500/>
 
-    NOTE: Some USB hubs may not be able to supply enough current to power both AVR128DB48 & RNWF02PC boards, which is why up to this point, the RNWF02PC Add On Board has been powered on via the separate USB Type-C cable. At the end of this demo procedure, after verifying successful connection to Azure IoT Central, you can try removing the USB Type-C cable (and changing the jumper setting) and seeing if the system still works...
+    NOTE: Some USB ports may **not** be able to supply sufficient current to power both AVR128DB48 & RNWF02PC boards, which is why up to this point, the RNWF02PC Add On Board has been powered using the separate USB Type-C cable. At the end of this demo procedure, after verifying successful connection to Azure IoT Central, you can try removing the USB Type-C cable (and changing the jumper setting) and seeing if the system still works...
 
 2. Use a micro-USB cable to connect the AVR128DB48 board directly to one of your PC's standard USB ports
 
@@ -160,11 +160,11 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 3. Launch a [Terminal Emulator](https://en.wikipedia.org/wiki/List_of_terminal_emulators) program of your choice and connect to the AVR128DB48 Curiosity Nano's Virtual COM Port at 115200 baud.
 
-    - Windows users: The correct one to select will most likely be the one that shows up as a Virtual COM Port
+    - Windows: The correct one to select will most likely be the one that shows up as a PICkit4 On Board Virtual COM Port
 
         <img src=".//media/image17a.png" width=400 />
 
-    - MacOS users: The correct one to select will most likely be the one that contains "usbmodem" as part of the descriptor
+    - MacOS: The correct one to select will most likely be the one that contains "usbmodem" as part of the COM port name
 
         <img src=".//media/image17b.png" width=200 />
 
@@ -199,8 +199,8 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 10. In the `azure_pnp.h` header file, set the parameters corresponding to your IoT device
 
-    - `AZURE_DEVICE_ID` (confirm this matches the Common Name (CN) used in the device/client certificate (e.g. `MyDevice`))
-    - `AZURE_ID_SCOPE` (look up the ID scope for your IoT Central application by using the left-hand navigation pane [Security -> Permissions -> Device connection groups])
+    - `AZURE_DEVICE_ID`: This should match the Common Name (CN) used in the device/client certificate (e.g. `MyDevice`)
+    - `AZURE_ID_SCOPE`: Look up the ID scope for your IoT Central application by using the left-hand navigation pane [Security > Permissions > Device connection groups]
 
         <img src="./media/ID_Scope_LookUp.png" alt="Script Configuration" width = 500/>
 
@@ -208,7 +208,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
     - right-click on the `avr128db48_rnwf02` project
     - select `Properties`
-    - under `Connected Hardware Tool`, select `AVR128DB48 Curiosity Nano-SN`
+    - select `AVR128DB48 Curiosity Nano-SN` under `Connected Hardware Tool`
     - select the latest version for `CMSIS`
     - select the latest version for `AVR-Dx_DFP`
     - select the latest XC8 version for `Compiler Toolchain`

@@ -1,42 +1,45 @@
-### Certificate Infrastructure 
+## Generating a Chain of Trust (X.509 Certificates & Keys)
 
-The provided GitBash Shell scripts enable easy creation of certificate infrastructure and individual device certificates with very minimal user inputs.
+The provided GitBash shell scripts enable easy creation of a chain of trust with minimal steps. These scripts are based on Microsoft Azure's [Create and Upload Certificates for Testing](https://learn.microsoft.com/en-us/azure/iot-hub/tutorial-x509-test-certs?tabs=windows) tutorial.
 
-These scripts are based on the Azure's [Create and Upload Certificates for Testing](https://learn.microsoft.com/en-us/azure/iot-hub/tutorial-x509-test-certs?tabs=windows) tutorial.
+### Software Prerequisites
 
-#### Prerequisit
+- [GitBash](https://git-scm.com/download/win) or [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3)
 
-- [GitBash](https://git-scm.com/download/win)
+### Create Certificates for the Root CA & Intermediate/Subordinate/Signer CA
 
+1. Open a GitBash or PowerShell window and use the `cd` instruction on the command line to navigate to the `\AzureDemo_RNWF\avr128db438_rnwf02\cert-chain-gen-scripts\` directory
 
-#### Initial Infrastructure
+2. Run the first shell script by executing one of the below commands (if the first one doesn't work, try the second one). The script requires the user to input information about the Root CA & Intermediate/Subordinate/Signer CA. Default values are provided for each parameter which can be accepted by leaving the field blank and hitting [RETURN].
 
-1) Clone the Certificate infrastructure tools
+    ```bash
+    bash create_initial_setup.sh
+    sh ./create_initial_setup.sh
+    ```
 
-2) Right click and open the GitBash in the tools folder
+    <img width="700" src="./media/init_cert_infra.png"></p>
 
-<p align="center"><img width="300" src="./assets/git_bash_prompt.png"></p>
+3. Upon successful execution of this script, the below 3 new folders will be created. The certificates (*.crt files) for the Root CA and the Intermediate/Subordinate/Signer CA can be found in each of their respective sub-folders (e.g. `rootca` & `subca`). 
 
-3) Run the *create_initial_setup.sh* as shown in the following screenshot. It will request the user to provide the domain suffix and common name for Root CA. 
+    <img width="300" src="./media/cert_infra_folders.png"></p>
 
-<p align="center"><img width="500" src="./assets/init_cert_infra.png"></p>
+### Create the Device Certificate with a Common Name (CN)
 
-Up on successful execution of above command, following 3 new folders will be created!
+1. Open a GitBash or PowerShell window and and use the `cd` instruction on the command line to navigate to the `\AzureDemo_RNWF\avr128db438_rnwf02\cert-chain-gen-scripts\` directory
 
-<p align="center"><img width="200" src="./assets/cert_infra_folders.png"></p>
+2. Execute one of the below commands to create the device certificate and key (if the first one doesn't work, try the second one). The script requires the user to provide the Subordinate/Intermediate/Signer CA folder name and a unique device ID (a.k.a. the "Common Name"). The device certificate that is generated will be signed by the Subordinate/Intermediate/Signer CA which was created previously.
 
-#### Device Certificate
+    ```bash
+    bash create_device_certificate.sh
+    sh ./create_device_certificate.sh
+    ```
 
-1) Run the *create_device_certificate.sh* to create individual device certificate. It requests the user to provide Subordinate/Intermediate CA folder name and a unique device id (Common Name).
+    <img width="700" src="./media/dev_cert_cmd.png"></p>
 
-<p align="center"><img width="500" src="./assets/dev_cert_cmd.png"></p>
+3. Upon successful execution of device certificate script, a new folder (named after the Common Name) is created inside the `../cert-chain-gen-scripts/devcerts` folder as shown in following screenshot
 
+    <img width="300" src="./media/dev_cert_files.png"></p>
 
-Note:- In order to modify the default subject identifier information, open the *create_device_certificate.sh* and update the following macros.
+4. In order to modify the default subject identifier information, you can open the *create_device_certificate.sh* file and update the following macros:
 
-<p align="center"><img width="200" src="./assets/dev_cert_sub_info.png"></p>
-
-2) On successful execution of device certificate, a new folder is created inside the *../tools/devcerts* folder as shown in following screenshot
-
-<p align="center"><img width="200" src="./assets/dev_cert_files.png"></p>
-
+    <img width="600" src="./media/dev_cert_sub_info.png"></p>
