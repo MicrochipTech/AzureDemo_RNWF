@@ -266,11 +266,11 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
     NOTE: You can access any of your IoT Central applications in the future by accessing the [IoT Central Portal](https://apps.azureiotcentral.com).
 
-22. At this point, assuming everything is working as described, you can see if your USB hub can supply enough current to power both boards using just the single USB cable connected to the AVR128DB48 Curiosity Nano. Move the jumper on the RNWF02PC Add On Board so that the 2 pins furthest away from the module are shorted, and then disconnect the USB Type-C cable.
+22. At this point, assuming everything is working as described, you can see if your USB hub can supply enough current to power both boards using just the single USB cable connected to the AVR128DB48 Curiosity Nano. Disconnect the USB Type-C cable from the RNWF02PC Add On Board. Move the jumper so that the 2 pins furthest away from the module are shorted.
 
     <img src=".//media/RNWF02_Power_VCC.png" width=500/>
 
-    Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for approximately 4 seconds and then releasing it. Hopefully the connection process repeats successfully as shown in the following example terminal output!
+23. Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for approximately 4 seconds and then releasing it. Hopefully the connection process repeats successfully as shown in the following example terminal output!
 
     <img src=".//media/Terminal_Output.png" width=700/>
 
