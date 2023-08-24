@@ -227,7 +227,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 14. Observe the debug messages that are being continuously output to the terminal window. On every firmware reset, the AVR128DB48 will query the RNWF02PC module for information on its Wi-Fi configuration and the names of all certificates and keys which are currently stored in the module's internal memory. Successful responses from the RNWF02PC module should look something like the following terminal window messages:
 
-    <img src=".//media/RNWF_Responses_Good.png" width=800 />
+    <img src=".//media/RNWF_Responses_Good.png" width=900 />
 
     However, if there is a problem with the RNWF02PC module, it will not respond to the Host MCU's queries for information on Wi-Fi/certificates/keys, so there will be blank lines displayed under each query as shown in the following terminal window output:
 
@@ -239,7 +239,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 16. The connection to Azure IoT Central is successful if telemetry messages are being continuously output to the terminal window. If the program appears to stall during the connection process (e.g. minutes of inactivity in the terminal window), you can hold down the `SW0` user button on the AVR128DB48 Curiosity Nano board for at least 5 seconds and then release the button to trigger a software reset. It may also be necessary to cycle power to the RNWF02PC Add On Board before resetting the AVR128DB48 Curiosity Nano board.
 
-    <img src=".//media/Terminal_Output.png" width=700/>
+    <img src=".//media/Terminal_Output.png" width=900/>
 
 17. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
 
@@ -284,7 +284,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 25. Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for at least 5 seconds and then releasing the button. Hopefully the entire connection process repeats successfully as shown in the following example terminal output!
 
-    <img src=".//media/Terminal_Output.png" width=700/>
+    <img src=".//media/Terminal_Output.png" width=900/>
 
 ## References
 
