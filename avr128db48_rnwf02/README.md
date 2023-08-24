@@ -1,4 +1,4 @@
-# Provisioning the Microchip AVR128DB48 Curiosity Nano Evaluation Kit for Microsoft Azure IoT Services
+# Provisioning the Microchip AVR128DB48 Curiosity Nano Evaluation Kit and RNWF02PC Add On Board for Microsoft Azure IoT Services
 
 ## Introduction
 
@@ -68,7 +68,7 @@ As an alternative, scroll up towards the top of this page, click on the **Code**
 
 <img src=".//media/Download_ZIP.png" width=400/>
 
-### Step 2 - Provision the RNWF02PC Add On Board
+### Step 2 - Provision the RNWF02PC Module
 
 For secure connections, a chain of trust (which includes certificates & keys for the root, signer, and client) needs to be generated and programmed into the RNWF02PC module.
 
@@ -125,7 +125,7 @@ A Python script has been provided to help you easily program the device's certif
 
 * Upon successful completion of uploading the device certificate & key files into the RNWF02PC module, the USB-to-UART converter can now be disconnected from the PC & RNWF02PC Add On Board. Keep the RNWF02PC Add On Board powered on via the USB Type-C cable.
 
-### Step 3 - Create an Azure IoT Central Application
+### Step 3 - Create an Azure IoT Central Cloud Application
 
 #### 3.1 Create an Azure Account and Subscription
 
