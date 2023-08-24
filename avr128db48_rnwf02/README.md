@@ -84,7 +84,7 @@ Click [here](./cert-chain-gen-scripts/) and follow the instructions to use GitBa
 
 A Python script has been provided to help you easily program the device's certificate & key files into the RNWF02PC module. If you are using the pre-existing default chain of trust that has been provided in this example, you will just need to program the `myDevice_cert.pem` & `myDevice_key.pem` files that are located in this [sub-folder](./cert-chain-gen-tool/). Please note that the Common Name (CN) for the provided device certificate is "MyDevice" - which means the Device ID will correspond to this Common Name (CN) for registration/identification purposes in Azure.
 
-* <img src=".//media/MyDevice_Files.png" width=600/>
+* <img src=".//media/MyDevice_Files.png" width=800/>
 
 * Open a `Command Prompt` window and use the command line to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory. Execute the following command to install the Python packages required for executing the script (if `pip` is an unrecognized command, try using `pip3`):
 
@@ -160,7 +160,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 2. Use a micro-USB cable to connect the AVR128DB48 board directly to one of your PC's standard USB ports
 
-    <img src=".//media/PC_to_AVR128DB48.png" width=500/>
+    <img src=".//media/PC_to_AVR128DB48.png" width=600/>
 
 3. Launch a [Terminal Emulator](https://en.wikipedia.org/wiki/List_of_terminal_emulators) program of your choice and connect to the AVR128DB48 Curiosity Nano's Virtual COM Port at 115200 baud.
 
@@ -174,7 +174,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 4. Launch the `MPLAB X` IDE (this tool should have been previously installed and most likely resides in the \Program Files\Microchip\ folder. Once the MPLAB X IDE has finished its initialization routines, you should notice the "Kit Window" that acknowledges an active connection to the AVR128DB48 Curiosity Nano Evaluation Kit
 
-    <img src=".//media/image18b.png"  />
+    <img src=".//media/image18b.png"  width=400 />
 
 5. Navigate to the main toolbar's `File` > `Open Project` operation to load the demo project folder (\*.X) located at `\AzureDemo_RNWF\avr128db48_rnwf02\avr128db48_rnwf02.X`
 
@@ -233,13 +233,15 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
     <img src=".//media/RNWF_Responses_Bad.png" width=250 />
 
+    Whenever these communication issues are observed between the Host MCU and RNWF02PC module, try resetting the AVR128DB48 Host MCU by holding down the `SW0` user button for at least 5 seconds and then releasing the button. If the RNWF02PC module still fails to respond to the read commands, try cycling power to the RNWF02PC Add On Board before resetting the AVR128DB48 Curiosity Nano board.
+
 15. Assuming the RNWF02PC module successfully responded to each of the queries for Wi-Fi configuration, certificate file names, and key file names, it may take 1-2 minutes to establish the connections with both the Device Provisioning Service (DPS) and the IoT Hub used by the IoT Central application. Upon successful registration with DPS and connection to IoT Hub, the terminal output messages should look something like the following:
 
     <img src=".//media/Connection_Messages.png" width=800 />
 
 16. The connection to Azure IoT Central is successful if telemetry messages are being continuously output to the terminal window. If the program appears to stall during the connection process (e.g. minutes of inactivity in the terminal window), you can hold down the `SW0` user button on the AVR128DB48 Curiosity Nano board for at least 5 seconds and then release the button to trigger a software reset. It may also be necessary to cycle power to the RNWF02PC Add On Board before resetting the AVR128DB48 Curiosity Nano board.
 
-    <img src=".//media/Terminal_Output.png" width=900/>
+    <img src=".//media/Terminal_Output.png" width=1000/>
 
 17. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
 
@@ -247,27 +249,27 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 19. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
 
-    <img src=".//media/image89.png" width=800 />
+    <img src=".//media/image89.png" width=1000 />
 
 20. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
 
-    <img src=".//media/image90.png" width=800 />
+    <img src=".//media/image90.png" width=1000 />
 
 21. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
 
-    <img src=".//media/image91.png" width=800 />
+    <img src=".//media/image91.png" width=600 />
 
     Try changing the state of the `LED0` to switch between the Off, On, and Blinking modes. The Telemetry Reporting Rate can also be adjusted to change the period (in seconds) for sending the continuous telemetry reports.
 
 22. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
 
     <img src=".//media/image92.png" width=400 />
-    <img src=".//media/image93.png" width=250 />
+    <img src=".//media/image93.png" width=300 />
 
 23. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
 
     <img src=".//media/image94.png" width=400 />
-    <img src=".//media/image95.png" width=200 />
+    <img src=".//media/image95.png" width=300 />
 
     "PT5S" is an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) period designator, which decodes to 5 seconds following the standard's definition.  This demo firmware only supports periods in seconds, but the standard covers durations of years, months, days, etc.
 
@@ -284,7 +286,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 25. Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for at least 5 seconds and then releasing the button. Hopefully the entire connection process repeats successfully as shown in the following example terminal output!
 
-    <img src=".//media/Terminal_Output.png" width=900/>
+    <img src=".//media/Terminal_Output.png" width=1000/>
 
 ## References
 
