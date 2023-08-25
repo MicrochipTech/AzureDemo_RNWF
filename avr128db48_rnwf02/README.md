@@ -12,7 +12,7 @@ This document describes how to connect the AVR128DB48 Curiosity Nano Evaluation 
 
 * [AVR128DB48 Curiosity Nano Evaluation Kit](https://www.microchip.com/en-us/development-tool/ev35l43a)
 
-    <img src=".//media/avr128db48_cnano.png" width=500/>
+    <img src=".//media/avr128db48_cnano.png" width=400/>
 
 * [Curiosity Nano Base for Click Boards](https://www.microchip.com/en-us/development-tool/ac164162)
 
@@ -154,6 +154,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 1. Install the AVR128DB48 Evaluation Kit & RNWF02PC Add On Board (still powered on via USB Type-C cable) onto the Curiosity Nano Adapter base board as shown
 
+    <img src=".//media/AR128DB48_CNANO_RNWF02_Top.png" width=500/>
     <img src=".//media/AVR128DB48_RNWF02PC.png" width=500/>
 
     NOTE: Some USB ports may **not** be able to supply sufficient current to power both AVR128DB48 & RNWF02PC boards, which is why up to this point, the RNWF02PC Add On Board has been powered using the separate USB Type-C cable. At the end of this demo procedure, after verifying successful connection to Azure IoT Central, you can try removing the USB Type-C cable (and changing the jumper setting) and seeing if the system still works...
@@ -257,7 +258,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 21. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
 
-    <img src=".//media/image91.png" width=600 />
+    <img src=".//media/image91.png" width=500 />
 
     Try changing the state of the `LED0` to switch between the Off, On, and Blinking modes. The Telemetry Reporting Rate can also be adjusted to change the period (in seconds) for sending the continuous telemetry reports.
 

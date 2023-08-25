@@ -1,4 +1,4 @@
-# Microsoft Azure Demos using Microchip Technology's RNWF Serial-to-Cloud Bridge Certified Modules
+# Microsoft Azure Demos using Microchip Technology's RNWF "Serial-to-Cloud Bridge" Wireless Modules
 
 This repository contains examples of embedded firmware projects for various combinations of Microchip Technology MCU & RNWF development boards:
 
