@@ -72,7 +72,9 @@ RNWF_RESULT_t RNWF_MQTT_SRVC_Callback(RNWF_MQTT_EVENT_t event, uint8_t *p_str)
             mqtt_pub.qos = MQTT_QOS0;
             mqtt_pub.isRetain = NO_RETAIN;
             mqtt_pub.topic = MQTT_DPS_TOP_SET_REG;
-            mqtt_pub.message = MQTT_DPS_MSG_SET_REQ;        
+            printf("DPS registration topic = %s\n", mqtt_pub.topic);
+            mqtt_pub.message = MQTT_DPS_MSG_SET_REQ;       
+            printf("DPS registration payload = %s\n", mqtt_pub.message);
             result = RNWF_MQTT_SrvCtrl(RNWF_MQTT_PUBLISH, (void *)&mqtt_pub);
         }
         break;

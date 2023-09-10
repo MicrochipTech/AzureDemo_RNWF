@@ -12,7 +12,7 @@
 
    <img src=".//media/image82.png" width = 400 />
 
-4. Click on `+ Add certificate` and browse to the **signer** certificate file (e.g. `signerCa_cert.pem` that is provided in the example chain of trust). Click the `Upload` button (then click on `Close` when the certificate has been accepted)
+4. Click on `+ Add certificate` and browse to the **signer** certificate file (e.g. `subca.crt`). Click the `Upload` button (then click on `Close` when the certificate has been accepted)
 
    <img src=".//media/image76.png" width = 400 />
 

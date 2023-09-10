@@ -2,6 +2,8 @@
 
 The provided GitBash shell scripts enable easy creation of a chain of trust with minimal steps. These scripts are based on Microsoft Azure's [Create and Upload Certificates for Testing](https://learn.microsoft.com/en-us/azure/iot-hub/tutorial-x509-test-certs?tabs=windows) tutorial.
 
+NOTE: If any problems are encountered with running the scripts, an example chain of trust has been provided in this [sub-folder](../cert-chain-gen-tool/).
+
 ### Software Prerequisites
 
 - [GitBash](https://git-scm.com/download/win) or [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3)
@@ -23,7 +25,7 @@ The provided GitBash shell scripts enable easy creation of a chain of trust with
 
     <img width="300" src="./media/cert_infra_folders.png"></p>
 
-### Create the Device Certificate with a Common Name (CN)
+### Create the Device Certificate & Key based on a Unique Common Name (CN)
 
 1. Open a GitBash or PowerShell window and and use the `cd` instruction on the command line to navigate to the `\AzureDemo_RNWF\avr128db438_rnwf02\cert-chain-gen-scripts\` directory
 
@@ -36,10 +38,10 @@ The provided GitBash shell scripts enable easy creation of a chain of trust with
 
     <img width="700" src="./media/dev_cert_cmd.png"></p>
 
-3. Upon successful execution of device certificate script, a new folder (named after the Common Name) is created inside the `../cert-chain-gen-scripts/devcerts` folder as shown in following screenshot
+3. Upon successful execution of device certificate script, a new folder (named after the Common Name) is created inside the `../cert-chain-gen-scripts/devcerts` folder as shown in following screenshot. The device certificate corresponds to the `<Common_Name>.pem` file and the device key corresponds to the `<Common_Name>.key` file:
 
     <img width="300" src="./media/dev_cert_files.png"></p>
 
-4. In order to modify the default subject identifier information, you can open the *create_device_certificate.sh* file and update the following macros:
+4. [OPTIONAL] In order to modify the default subject identifier information, you can open the *create_device_certificate.sh* file and update the following macros:
 
     <img width="600" src="./media/dev_cert_sub_info.png"></p>

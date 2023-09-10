@@ -94,7 +94,8 @@ const char *tls_cfg_hub[] = {"DigiCertGlobalRootG2", DEVICE_FILENAME_CERT, DEVIC
 
 RNWF_MQTT_CFG_t mqtt_cfg = {
     .url = "global.azure-devices-provisioning.net",
-    .username = AZURE_SCOPE_ID"/registrations/"AZURE_DEVICE_ID"/api-version=2019-03-31",    
+    //.username = AZURE_SCOPE_ID"/registrations/"AZURE_DEVICE_ID"/api-version=2019-03-31",    
+    .username = AZURE_SCOPE_ID"/registrations/"AZURE_DEVICE_ID"/api-version=2021-06-01&model-id="AZURE_MODEL_ID"",  
     .clientid = AZURE_DEVICE_ID,    
     .password = "",
     .port = 8883,

@@ -72,21 +72,21 @@ As an alternative, scroll up towards the top of this page, click on the **Code**
 
 For secure connections, a chain of trust (which includes certificates & keys for the root, signer, and client) needs to be generated and programmed into the RNWF02PC module.
 
-The client certificate file will be needed when we create the device in Azure IoT Central using the individual enrollment method. Another option is to use the group enrollment method which requires uploading the signer certificate file (or in some cases, could be the root certificate if the client certificate is chained directly to the Root CA) to the Azure IoT Central application, so that any device which presents a leaf certificate that was derived from the signer (or root) certificate will automatically be granted access to registration (which is governed by the Device Provisioning Service linked to the IoT Hub that's used by an IoT Central application).
+The device (client) certificate file will be needed when we create the device in Azure IoT Central using the individual enrollment method. Another option is to use the group enrollment method which requires uploading the signer certificate file (or in some cases, could be the root certificate if the client certificate is chained directly to the Root CA) to the Azure IoT Central application, so that any device which presents a leaf certificate that was derived from the signer (or root) certificate will automatically be granted access to registration (which is governed by the Device Provisioning Service linked to the IoT Hub that's used by an IoT Central application).
 
-NOTE: For evaluation purposes, an example chain of trust has been provided in this [sub-folder](./cert-chain-gen-tool/). If you are not interested in going through the detailed steps of creating your own chain of trust at this time, feel free to jump directly to Step 2.2 below to use the provided set of example files.
+#### 2.1 Generate the Files for Your Chain of Trust
 
-#### 2.1 Generate the files for your certificates & keys
+To automate the process, GitBash shell scripts are provided to generate your chain of trust. During execution of the scripts, you will be asked to provide names for the Root CA, Signer (Subordinate/Intermediate) CA, and the Common Name (CN) for the device. The Common Name for the device should be a unique identifier and will be used as the registration ID when connecting to the Azure IoT Central's Device Provisioning Service (DPS).
 
-Click [here](./cert-chain-gen-scripts/) and follow the instructions to use GitBash shell scripts to generate your chain of trust. During execution of the scripts, you will be asked to provide names for the Root CA, Signer (Subordinate/Intermediate) CA, and the Common Name (CN) for the device. The Common Name for the device will be used as the registration ID when connecting to the Azure IoT Central's Device Provisioning Service (DPS).
+Click [here](./cert-chain-gen-scripts/) and follow the instructions to use the GitBash shell scripts to generate your chain of trust. 
 
 #### 2.2 Upload Device Certificate & Key into the RNWF02PC Module
 
-A Python script has been provided to help you easily program the device's certificate & key files into the RNWF02PC module. If you are using the pre-existing default chain of trust that has been provided in this example, you will just need to program the `myDevice_cert.pem` & `myDevice_key.pem` files that are located in this [sub-folder](./cert-chain-gen-tool/). Please note that the Common Name (CN) for the provided device certificate is "MyDevice" - which means the Device ID will correspond to this Common Name (CN) for registration/identification purposes in Azure.
+A Python script has been provided to help you easily program the device's certificate & key files into the RNWF02PC module.
 
-* <img src=".//media/MyDevice_Files.png" width=800/>
+* Open a `Command Prompt` window and use the `cd` commands to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory.
 
-* Open a `Command Prompt` window and use the command line to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory. Execute the following command to install the Python packages required for executing the script (if `pip` is an unrecognized command, try using `pip3`):
+* Execute the following command to install the Python packages required for executing the script (if `pip` is an unrecognized command, try using `pip3`):
 
     ```bash
     pip install -r requirements.txt
@@ -98,10 +98,10 @@ A Python script has been provided to help you easily program the device's certif
     python file_transfer.py list cert
     ```
 
-* Load the device **certificate** file (e.g. `myDevice_cert.pem`) into the RNWF02PC module by executing the following command line (use the Common Name (e.g. `MyDevice`)  as the name of the **certificate** file stored in the module):
+* Load the device **certificate** file (e.g. `<Common_Name>.pem`) into the RNWF02PC module by executing the following command line (and which uses the Common Name (CN) as the name of the **certificate** file stored in the module):
 
     ```bash
-    python file_transfer.py load cert -f "MyDevice" -p "../../cert-chain-gen-tool/myDevice_cert.pem"
+    python file_transfer.py load cert -f "<Common_Name>" -p "../../cert-chain-gen-scripts/devcerts/<Common_Name>.pem"
     ```
 
 * Execute the following command to get a list of all the **keys** that are currently programmed in the RNWF02PC module  (if `python` is an unrecognized command, try using `python3` or `py -3`):
@@ -110,13 +110,13 @@ A Python script has been provided to help you easily program the device's certif
     python file_transfer.py list key
     ```
 
-* Load the device **key** file (e.g. `myDevice_key.pem`) into the RNWF02PC module by executing the following command line (use the Common Name (e.g. `MyDevice`) as the name of the **key** file stored in the module):
+* Load the device **key** file (e.g. `<Common_Name>.key`) into the RNWF02PC module by executing the following command line (and which uses the Common Name (CN) as the name of the **key** file stored in the module):
 
     ```bash
-    python file_transfer.py load key -f "MyDevice" -p "../../cert-chain-gen-tool/myDevice_key.pem"
+    python file_transfer.py load key -f "<Common_Name>" -p "../../cert-chain-gen-scripts/devcerts/<Common_Name>.key"
     ```
 
-* If needed, you can delete certificates and/or keys from the RNWF02PC module by executing the following commands:
+* If needed in the future, previously-programmed certificates and/or keys can be deleted from the RNWF02PC module by executing the following commands:
 
     ```bash
     python file_transfer.py delete cert -f "<CERTIFICATE_NAME>"

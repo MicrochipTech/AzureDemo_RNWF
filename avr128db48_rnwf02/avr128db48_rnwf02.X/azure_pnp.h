@@ -32,7 +32,7 @@
 #define	AZURE_PNP_H
 
 
-#define AZURE_DEVICE_ID         "MyDevice"
+#define AZURE_DEVICE_ID         "<COMMON_NAME>"
 #define AZURE_MODEL_ID          "dtmi:com:Microchip:AVR128DB48_CNANO;1"
 #define AZURE_SCOPE_ID          "0ne000FFA42"//"0ne00AAE0D0"
 #define AZURE_DPS_ENABLE        1
