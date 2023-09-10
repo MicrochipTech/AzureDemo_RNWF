@@ -101,7 +101,13 @@ A Python script has been provided to help you easily program the device's certif
 * Load the device **certificate** file (e.g. `<Common_Name>.pem`) into the RNWF02PC module by executing the following command line (and which uses the Common Name (CN) as the name of the **certificate** file stored in the module):
 
     ```bash
-    python file_transfer.py load cert -f "<Common_Name>" -p "../../cert-chain-gen-scripts/devcerts/<Common_Name>.pem"
+    python file_transfer.py load cert -f "<Common_Name>" -p "../../cert-chain-gen-scripts/devcerts/<Common_Name>/<Common_Name>.pem"
+    ```
+
+    For example:
+
+    ```bash
+    python file_transfer.py load cert -f "rnwf02_device_01" -p "../../cert-chain-gen-scripts/devcerts/rnwf02_device_01/rnwf02_device_01.pem"
     ```
 
 * Execute the following command to get a list of all the **keys** that are currently programmed in the RNWF02PC module  (if `python` is an unrecognized command, try using `python3` or `py -3`):
@@ -113,7 +119,13 @@ A Python script has been provided to help you easily program the device's certif
 * Load the device **key** file (e.g. `<Common_Name>.key`) into the RNWF02PC module by executing the following command line (and which uses the Common Name (CN) as the name of the **key** file stored in the module):
 
     ```bash
-    python file_transfer.py load key -f "<Common_Name>" -p "../../cert-chain-gen-scripts/devcerts/<Common_Name>.key"
+    python file_transfer.py load key -f "<Common_Name>" -p "../../cert-chain-gen-scripts/devcerts/<Common_Name>/<Common_Name>.key"
+    ```
+
+    For example:
+
+    ```bash
+    python file_transfer.py load key -f "rnwf02_device_01" -p "../../cert-chain-gen-scripts/devcerts/rnwf02_device_01/rnwf02_device_01.key"
     ```
 
 * If needed in the future, previously-programmed certificates and/or keys can be deleted from the RNWF02PC module by executing the following commands:

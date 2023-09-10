@@ -2,7 +2,9 @@
 
 The provided GitBash shell scripts enable easy creation of a chain of trust with minimal steps. These scripts are based on Microsoft Azure's [Create and Upload Certificates for Testing](https://learn.microsoft.com/en-us/azure/iot-hub/tutorial-x509-test-certs?tabs=windows) tutorial.
 
-NOTE: If any problems are encountered with running the scripts, an example chain of trust has been provided in this [sub-folder](../cert-chain-gen-tool/).
+NOTE: If any problems are encountered with running the scripts, an example chain of trust has already been generated based on a device Common Name of "rnwf02_device_01".
+
+<img width="700" src="./media/chain_rnwf02_device_01.png"></p>
 
 ### Software Prerequisites
 
