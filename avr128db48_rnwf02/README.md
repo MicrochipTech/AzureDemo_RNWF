@@ -84,58 +84,58 @@ Click [here](./cert-chain-gen-scripts/) and follow the instructions to use the G
 
 A Python script has been provided to help you easily program the device's certificate & key files into the RNWF02PC module.
 
-* Open a `Command Prompt` window and use the `cd` commands to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory.
+1. Open a `Command Prompt` window and use the `cd` commands to navigate to the `\AzureDemo_RNWF\avr128db48_rnwf02\cert-key-flash-tool\python_script` directory.
 
-* Execute the following command to install the Python packages required for executing the script (if `pip` is an unrecognized command, try using `pip3`):
+2. Execute the following command to install the Python packages required for executing the script (if `pip` is an unrecognized command, try using `pip3`):
 
     ```bash
     pip install -r requirements.txt
     ```
 
-* Execute the following command to get a list of all the **certificates** that are currently programmed in the RNWF02PC module (if `python` is an unrecognized command, try using `python3` or `py -3`):
+3. Execute the following command to get a list of all the **certificates** that are currently programmed in the RNWF02PC module (if `python` is an unrecognized command, try using `python3` or `py -3`):
 
     ```bash
     python file_transfer.py list cert
     ```
 
-* Load the device **certificate** file (e.g. `<Common_Name>.pem`) into the RNWF02PC module by executing the following command line (and which uses the Common Name (CN) as the name of the **certificate** file stored in the module):
+4. Load the device **certificate** file (e.g. `<Common_Name>.pem`) into the RNWF02PC module by executing the following command line (and which uses the Common Name (CN) as the name of the **certificate** file stored in the module):
 
     ```bash
     python file_transfer.py load cert -f "<Common_Name>" -p "../../cert-chain-gen-scripts/devcerts/<Common_Name>/<Common_Name>.pem"
     ```
 
-    For example:
+    For example, to program the example device certificate (Common Name = "rnwf02_device_01") that has been provided, the exact command line to execute would be:
 
     ```bash
     python file_transfer.py load cert -f "rnwf02_device_01" -p "../../cert-chain-gen-scripts/devcerts/rnwf02_device_01/rnwf02_device_01.pem"
     ```
 
-* Execute the following command to get a list of all the **keys** that are currently programmed in the RNWF02PC module  (if `python` is an unrecognized command, try using `python3` or `py -3`):
+5. Execute the following command to get a list of all the **keys** that are currently programmed in the RNWF02PC module  (if `python` is an unrecognized command, try using `python3` or `py -3`):
 
     ```bash
     python file_transfer.py list key
     ```
 
-* Load the device **key** file (e.g. `<Common_Name>.key`) into the RNWF02PC module by executing the following command line (and which uses the Common Name (CN) as the name of the **key** file stored in the module):
+6. Load the device **key** file (e.g. `<Common_Name>.key`) into the RNWF02PC module by executing the following command line (and which uses the Common Name (CN) as the name of the **key** file stored in the module):
 
     ```bash
     python file_transfer.py load key -f "<Common_Name>" -p "../../cert-chain-gen-scripts/devcerts/<Common_Name>/<Common_Name>.key"
     ```
 
-    For example:
+    For example, to program the example device key that has been provided, the exact command line to execute would be:
 
     ```bash
     python file_transfer.py load key -f "rnwf02_device_01" -p "../../cert-chain-gen-scripts/devcerts/rnwf02_device_01/rnwf02_device_01.key"
     ```
 
-* If needed in the future, previously-programmed certificates and/or keys can be deleted from the RNWF02PC module by executing the following commands:
+7. If needed in the future for maintenance purposes, previously-programmed certificates and/or keys can be deleted from the RNWF02PC module by executing the following commands:
 
     ```bash
     python file_transfer.py delete cert -f "<CERTIFICATE_NAME>"
     python file_transfer.py delete key -f "<KEY_NAME>"
     ```
 
-* Upon successful completion of uploading the device certificate & key files into the RNWF02PC module, the USB-to-UART converter can now be disconnected from the PC & RNWF02PC Add On Board. Keep the RNWF02PC Add On Board powered on via the USB Type-C cable.
+8. Upon successful completion of uploading the device certificate & key files into the RNWF02PC module, the USB-to-UART converter can now be disconnected from the PC & RNWF02PC Add On Board. Keep the RNWF02PC Add On Board powered on via the USB Type-C cable.
 
 ### Step 3 - Create an Azure IoT Central Cloud Application
 
@@ -216,7 +216,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 10. In the `azure_pnp.h` header file, set the parameters corresponding to your IoT device
 
-    - `AZURE_DEVICE_ID`: This should match the Common Name (CN) used in the device/client certificate (e.g. `MyDevice`)
+    - `AZURE_DEVICE_ID`: This should match the Common Name (CN) used in the device/client certificate (e.g. "rnwf02_device_01")
     - `AZURE_ID_SCOPE`: Look up the ID scope for your IoT Central application by using the left-hand navigation pane [Security > Permissions > Device connection groups]
 
         <img src="./media/ID_Scope_LookUp.png" alt="Script Configuration" width = 500/>

@@ -2,9 +2,9 @@
 
 The provided GitBash shell scripts enable easy creation of a chain of trust with minimal steps. These scripts are based on Microsoft Azure's [Create and Upload Certificates for Testing](https://learn.microsoft.com/en-us/azure/iot-hub/tutorial-x509-test-certs?tabs=windows) tutorial.
 
-NOTE: If any problems are encountered with running the scripts, an example chain of trust has already been generated based on a device Common Name of "rnwf02_device_01".
+NOTE: If any problems are encountered with running the scripts, an example chain of trust has already been generated based on a device Common Name of "rnwf02_device_01" which can be used for evaluation purposes.
 
-<img width="700" src="./media/chain_rnwf02_device_01.png"></p>
+<img width="900" src="./media/chain_rnwf02_device_01.png"></p>
 
 ### Software Prerequisites
 
@@ -18,14 +18,17 @@ NOTE: If any problems are encountered with running the scripts, an example chain
 
     ```bash
     bash create_initial_setup.sh
+    ```
+    ...or
+    ```bash
     sh ./create_initial_setup.sh
     ```
 
     <img width="700" src="./media/init_cert_infra.png"></p>
 
-3. Upon successful execution of this script, the below 3 new folders will be created. The certificates (*.crt files) for the Root CA and the Intermediate/Subordinate/Signer CA can be found in each of their respective sub-folders (e.g. `rootca` & `subca`). 
+3. Upon successful execution of this script, the below 3 new folders will be created. The certificates (*.crt files) for the Root CA and the Intermediate/Subordinate/Signer CA can be found in each of their respective sub-folders (e.g. [rootca](./rootca/) & [subca](./subca/)). 
 
-    <img width="300" src="./media/cert_infra_folders.png"></p>
+    <img width="600" src="./media/rootca_subca_files.png"></p>
 
 ### Create the Device Certificate & Key based on a Unique Common Name (CN)
 
@@ -35,6 +38,9 @@ NOTE: If any problems are encountered with running the scripts, an example chain
 
     ```bash
     bash create_device_certificate.sh
+    ```
+    ...or
+    ```bash
     sh ./create_device_certificate.sh
     ```
 
