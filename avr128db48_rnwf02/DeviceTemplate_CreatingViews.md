@@ -18,24 +18,11 @@ A "view" can be created and added to any device template that's already been imp
 
     <img src=".//media/views_img_04.png" width=200>
 
-5. Using the left-hand navigation pane in the device template, click on **Views**
+5. Click on the `Publish` icon (towards the top of the page) and a pop-up dialog box should appear; click on the `Publish` button
 
-    <img src=".//media/views_img_02.png">
-
-6. Click on the tile named `Generate default views` 
-
-    <img src=".//media/views_img_03.png">
-
-7. Click the button titled `Generate default dashboard view(s)` 
-
-    <img src=".//media/views_img_08.png">
-
-8. Click on the `Publish` icon (towards the top of the page) and a pop-up dialog box should appear; click on the `Publish` button
-
-    <img src=".//media/views_img_09.png">
     <img src=".//media/views_img_10.png">
 
-10. Using the left-hand navigation pane, access your device by selecting  `Devices` under **Connect**. The new views which were just added (About, Overview, Properties) should appear and be ready for use!
+6. Using the left-hand navigation pane, access your device by selecting  `Devices` under **Connect**. The new views which were just added (About, Overview, Properties) should appear and be ready for use!
 
     <img src=".//media/views_img_11.png">
     <img src=".//media/views_img_12.png">
