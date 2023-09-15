@@ -62,3 +62,7 @@ avr128db48_rnwf02/avr128db48_rnwf02.X/.generated_files/
 *.bak
 /avr128db48_rnwf02/avr128db48_rnwf02.X/dist/
 /avr128db48_rnwf02/avr128db48_rnwf02.X/build/
+/pic18f57q84_rnwf02/pic18f57q84_rnwf02.X/dist/
+/pic18f57q84_rnwf02/pic18f57q84_rnwf02.X/build/
+/pic18f57q84_rnwf02/PIC18F57_RNRIO0_MQTT.X/build/
+/pic18f57q84_rnwf02/PIC18F57_RNRIO0_MQTT.X/dist/
