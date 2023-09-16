@@ -12,34 +12,34 @@ This document describes how to connect a Microchip Curiosity Nano Evaluation Kit
 
 * Host MCU Development Board: [AVR128DB48](https://www.microchip.com/en-us/development-tool/ev35l43a) or [PIC18F57Q84](https://www.microchip.com/en-us/development-tool/dm182030) Curiosity Nano Evaluation Kit
 
-    <img src=".//media/avr128db48_cnano.png" width=400/>
-    <img src=".//media/pic18f57q84_cnano.jpg" width=400/>
+    <img src=".//media/boards/avr128db48_cnano.png" width=400/>
+    <img src=".//media/boards/pic18f57q84_cnano.jpg" width=400/>
 
 * [Curiosity Nano Base for Click Boards](https://www.microchip.com/en-us/development-tool/ac164162)
 
-    <img src=".//media/cnano_base_click.png" width=300/>
+    <img src=".//media/boards/cnano_base_click.png" width=300/>
 
 * Serial-to-Cloud Bridge Accessory Board: [RNWF02PC Add On Board]()
 
-    <img src=".//media/RNWF02PC_Add_On_Board.png" width=300/>
+    <img src=".//media/boards/RNWF02PC_Add_On_Board.png" width=300/>
 
 ## Hardware Preparation
 
 1. Install a jumper to short the two pins closest to the RNWF02PC module.
 
-    <img src=".//media/RNWF02_Power_USB.png" width=500/>
+    <img src=".//media/boards/RNWF02_Power_USB.png" width=500/>
 
 2. Provide dedicated power to the RNWF02PC Add On Board by connecting a USB Type-C cable to a +5V DC power source that's preferably not a USB port/hub (e.g. USB wall charger).
 
-    <img src=".//media/DC_Supply_RNWF02.png" width=500/>
+    <img src=".//media/boards/DC_Supply_RNWF02.png" width=500/>
 
 3. Connect the USB-to-UART converter's RXD, TXD, & GND wires to the the TX, RX, & GND pins of the RNWF02PC Add On Board, respectively.
 
-    <img src=".//media/USB-UART_mikroBUS.png" width=500/>
+    <img src=".//media/boards/USB-UART_mikroBUS.png" width=500/>
 
 4. Connect the USB end of the USB-to-UART serial converter cable to one of the PC's standard USB ports. This is how the Host PC will communicate with the RNWF02PC module for provisioning purposes.
 
-    <img src=".//media/PC_to_USB-UART.png" width=300/>
+    <img src=".//media/boards/PC_to_USB-UART.png" width=300/>
 
 ## Software Prerequisites & Installation
 

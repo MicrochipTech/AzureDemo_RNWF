@@ -2,7 +2,7 @@
 
 A "view" can be created and added to any device template that's already been imported into an IoT Central application. One view that is particularly useful is the "Properties" view which displays all of a device's read-only and writable properties on the same page. Writable properties are easily updated in this view. There are also "General" views that can be created by default to quickly visualize the telemetry data being received by the IoT Central application. Any of the default views that are automatically generated can certainly be customized. Whenever a view has been added/edited with a device template, the final step is to publish the device template so that the new changes take effect within your IoT Central application.
 
-1. Using the left-hand navigation pane in the IoT Central application, click on **Device templates** and then click on the name of the device template
+1. Using the left-hand navigation pane in the IoT Central application, click on **Device templates** and then click on the name of the device template used for your specific configuration
 
     <img src=".//media/views_img_01.png">
 

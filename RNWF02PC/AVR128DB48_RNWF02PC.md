@@ -2,14 +2,14 @@
 
 1. Install the AVR128DB48 Curiosity Nano Evaluation Kit & RNWF02PC Add On Board (still powered on via USB Type-C cable) onto the Curiosity Nano Adapter base board as shown
 
-    <img src=".//media/AR128DB48_CNANO_RNWF02_Top.png" width=500/>
-    <img src=".//media/AVR128DB48_RNWF02PC.png" width=500/>
+    <img src=".//media/boards/AVR128DB48_CNANO_RNWF02_Top.png" width=500/>
+    <img src=".//media/boards/AVR128DB48_RNWF02PC.png" width=500/>
 
     NOTE: Some USB ports may **not** be able to supply sufficient current to power both Curiosity Nano & RNWF02PC boards, which is why up to this point, the RNWF02PC Add On Board has been powered using the separate USB Type-C cable. At the end of this demo procedure, after verifying successful connection to Azure IoT Central, you can try removing the USB Type-C cable (and changing the jumper setting) and seeing if the system still works...
 
 2. Use a micro-USB cable to connect the Curiosity Nano board directly to one of your PC's standard USB ports
 
-    <img src=".//media/PC_to_AVR128DB48.png" width=600/>
+    <img src=".//media/boards/PC_to_AVR128DB48.png" width=600/>
 
 3. Launch a [Terminal Emulator](https://en.wikipedia.org/wiki/List_of_terminal_emulators) program of your choice and connect to the Curiosity Nano's Virtual COM Port at 115200 baud.
 
@@ -91,30 +91,32 @@
 
     <img src=".//media/Terminal_Output.png" width=1000/>
 
-17. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
+17. Try pressing the `SW0` mechanical button on the Curiosity Nano board and see if the number of presses is being output to the terminal window.
 
-18. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
+18. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
 
-19. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
+19. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
+
+20. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
 
     <img src=".//media/image89.png" width=1000 />
 
-20. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
+21. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
 
     <img src=".//media/image90.png" width=1000 />
 
-21. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
+22. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
 
-    <img src=".//media/image91.png" width=500 />
+    <img src=".//media/boards/AVR128DB48_LED0.png" width=500 />
 
     Try changing the state of the `LED0` to switch between the Off, On, and Blinking modes. The Telemetry Reporting Rate can also be adjusted to change the period (in seconds) for sending the continuous telemetry reports.
 
-22. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
+23. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
 
     <img src=".//media/image92.png" width=400 />
     <img src=".//media/image93.png" width=300 />
 
-23. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
+24. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
 
     <img src=".//media/image94.png" width=400 />
     <img src=".//media/image95.png" width=300 />
@@ -128,10 +130,10 @@
 
     NOTE: You can access any of your IoT Central applications in the future by accessing the [IoT Central Portal](https://apps.azureiotcentral.com).
 
-24. At this point, assuming everything is working as described, you can see if your USB hub can supply enough current to power both boards using just the single USB cable connected to the AVR128DB48 Curiosity Nano. Disconnect the USB Type-C cable from the RNWF02PC Add On Board. Move the jumper so that the 2 pins furthest away from the module are shorted.
+25. At this point, assuming everything is working as described, you can see if your USB hub can supply enough current to power both boards using just the single USB cable connected to the AVR128DB48 Curiosity Nano. Disconnect the USB Type-C cable from the RNWF02PC Add On Board. Move the jumper so that the 2 pins furthest away from the module are shorted.
 
-    <img src=".//media/RNWF02_Power_VCC.png" width=500/>
+    <img src=".//media/boards/RNWF02_Power_VCC.png" width=500/>
 
-25. Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for at least 5 seconds and then releasing the button. Hopefully the entire connection process repeats successfully as shown in the following example terminal output!
+26. Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for at least 5 seconds and then releasing the button. Hopefully the entire connection process repeats successfully as shown in the following example terminal output!
 
     <img src=".//media/Terminal_Output.png" width=1000/>
