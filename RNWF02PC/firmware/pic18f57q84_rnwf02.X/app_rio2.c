@@ -1489,8 +1489,8 @@ void APP_RIO2_Tasks(void) {
         {
             //char buffer[150];
             char *operationID;
-            //Wait 2 seconds before requesting Assigned HUB
-            if ((getTick() - (SECOND * 1)) < myDelay)
+            //Wait 3 seconds before requesting Assigned HUB
+            if ((getTick() - (SECOND * 3)) < myDelay)
                 break;
             myDelay = getTick();
             if (gMQTTSUBRX) {
@@ -1528,7 +1528,7 @@ void APP_RIO2_Tasks(void) {
                     printf_2RIO(("%s", buffer));
 
                     strcpy (brokerCert,"DigiCertGlobalRootG2");
-                    app_rio2Data.state = APP_RIO2_STATE_AZURE_WAIT_DISCONNET;
+                    app_rio2Data.state = APP_RIO2_STATE_AZURE_WAIT_DISCONNECT;
                     gOK = false;
                     mqttCmdTblIndex = 0;
                     sprintf(broker, azureAssignedHub);
@@ -1539,7 +1539,7 @@ void APP_RIO2_Tasks(void) {
 
             break;
         }
-        case APP_RIO2_STATE_AZURE_WAIT_DISCONNET:
+        case APP_RIO2_STATE_AZURE_WAIT_DISCONNECT:
         {
             if (gMQTTCONN && !mqttConnected) {
                 gMQTTCONN = false;

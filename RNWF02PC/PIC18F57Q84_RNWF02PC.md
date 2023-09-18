@@ -82,20 +82,24 @@
 
 18. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
 
-    <img src=".//media/image90a.png" width=1000 />
+    <img src=".//media/image90b.png" width=1000 />
 
-19. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the PIC18F57Q84 Curiosity Nano Board behaves in the expected mode.
+19. Try pressing the `SW0` mechanical button on the Curiosity Nano board and see if the number of presses is being output to the terminal window. Refresh the **Raw Data** tab in the Device view and observe the button event data has been received as a telemetry event.
+
+    <img src=".//media/Telemetry_RawData.png" width=1000/>
+
+20. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the PIC18F57Q84 Curiosity Nano Board behaves in the expected mode.
 
     <img src=".//media/boards/PIC18F57Q84_LED0.png" width=500 />
 
     Try changing the state of the `LED0` to switch between the Off, On, and Blinking modes. The Telemetry Interval can also be adjusted to change the period (in seconds) for sending the continuous telemetry reports.
 
-20. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
+21. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
 
     <img src=".//media/image92.png" width=400 />
     <img src=".//media/image93.png" width=300 />
 
-21. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
+22. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
 
     <img src=".//media/image94.png" width=400 />
     <img src=".//media/image95.png" width=300 />
@@ -107,10 +111,10 @@
          5
         'S'econds
 
-    NOTE: You can access any of your IoT Central applications in the future by accessing the [IoT Central Portal](https://apps.azureiotcentral.com).
-
-22. At this point, assuming everything is working as described, you can see if your USB hub can supply enough current to power both boards using just the single USB cable connected to the PIC18F57Q84 Curiosity Nano. Disconnect the USB Type-C cable from the RNWF02PC Add On Board. Move the jumper so that the 2 pins furthest away from the module are shorted.
+23. At this point, assuming everything is working as described, you can see if your USB hub can supply enough current to power both boards using just the single USB cable connected to the PIC18F57Q84 Curiosity Nano. Disconnect the USB Type-C cable from the RNWF02PC Add On Board. Move the jumper so that the 2 pins furthest away from the module are shorted.
 
     <img src=".//media/boards/RNWF02_Power_VCC.png" width=500/>
 
-23. Reset the PIC18F57Q84 Curiosity Nano by typing [CTRL-C] in the terminal window. Hopefully the entire connection process repeats successfully again!
+24. Reset the PIC18F57Q84 Curiosity Nano by typing [CTRL-C] in the terminal window. Hopefully the entire connection process repeats successfully again!
+
+NOTE: You can access any of your IoT Central applications in the future by logging into the [IoT Central Portal](https://apps.azureiotcentral.com).

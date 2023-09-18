@@ -91,19 +91,21 @@
 
     <img src=".//media/Terminal_Output.png" width=1000/>
 
-17. Try pressing the `SW0` mechanical button on the Curiosity Nano board and see if the number of presses is being output to the terminal window.
+17. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
 
-18. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
+18. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
 
-19. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
-
-20. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
+19. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
 
     <img src=".//media/image89.png" width=1000 />
 
-21. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
+20. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
 
-    <img src=".//media/image90.png" width=1000 />
+    <img src=".//media/image90b.png" width=1000 />
+
+21. Try pressing the `SW0` mechanical button on the Curiosity Nano board and see if the number of presses is being output to the terminal window. Refresh the **Raw Data** tab in the Device view and observe the button event data has been received as a telemetry event.
+
+    <img src=".//media/Telemetry_RawData.png" width=1000/>
 
 22. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
 
@@ -128,8 +130,6 @@
          5
         'S'econds
 
-    NOTE: You can access any of your IoT Central applications in the future by accessing the [IoT Central Portal](https://apps.azureiotcentral.com).
-
 25. At this point, assuming everything is working as described, you can see if your USB hub can supply enough current to power both boards using just the single USB cable connected to the AVR128DB48 Curiosity Nano. Disconnect the USB Type-C cable from the RNWF02PC Add On Board. Move the jumper so that the 2 pins furthest away from the module are shorted.
 
     <img src=".//media/boards/RNWF02_Power_VCC.png" width=500/>
@@ -137,3 +137,5 @@
 26. Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for at least 5 seconds and then releasing the button. Hopefully the entire connection process repeats successfully as shown in the following example terminal output!
 
     <img src=".//media/Terminal_Output.png" width=1000/>
+
+NOTE: You can access any of your IoT Central applications in the future by logging into the [IoT Central Portal](https://apps.azureiotcentral.com).
