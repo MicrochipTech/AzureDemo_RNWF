@@ -44,8 +44,8 @@
 
 
 /* Wi-Fi Configuration */
-#define HOME_AP_SSID        "NETGEAR51"
-#define HOME_AP_PASSPHRASE  "melodicship232"
+#define HOME_AP_SSID        "<MY_NETWORK_SSID>"
+#define HOME_AP_PASSPHRASE  "<MY_NETWORK_PSWD>"
 #define HOME_AP_SECURITY    RNWF_WPA2
 
 #define AZURE_CLOUD     1

@@ -270,8 +270,8 @@ APP_RIO2_DATA app_rio2Data;
 #define PORT "8883"  //TLS PORT 8886 uses ISRGRootX1.pem from Free CA signer "Let's Encrypt"  https://letsencrypt.org/certificates/
 #define TLSENABLE "1"
 
-#define MY_THING_ID "<MY_DEVICE_NAME>"
-#define ID_SCOPE "<MY_ID_SCOPE>"
+#define MY_THING_ID "<MY_COMMON_NAME>" // e.g. "rnwf02_device_01"
+#define ID_SCOPE "<MY_ID_SCOPE>" // e.g. "0ne000FFA42"
 #define MODEL_ID "dtmi:com:Microchip:PIC18F57Q84_CNANO;1"
 
 #define CLIENTID MY_THING_ID

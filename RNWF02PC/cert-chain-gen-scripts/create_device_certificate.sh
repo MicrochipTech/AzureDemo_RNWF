@@ -20,7 +20,7 @@ openssl req -new -key devcerts/${dev_id}/${dev_id}.key -out devcerts/${dev_id}/$
 
 openssl ca -config ${subca_folder}/subca.conf -in devcerts/${dev_id}/${dev_id}.csr -out devcerts/${dev_id}/${dev_id}.crt -extensions client_ext -batch -key 1234
 
-openssl x509 -in devcerts/${dev_id}/${dev_id}.crt -out devcerts/${dev_id}/${dev_id}.pem
+openssl x509 -in devcerts/${dev_id}/${dev_id}.crt -out devcerts/${dev_id}/${dev_id}.pem -days 10950
 
 
 
