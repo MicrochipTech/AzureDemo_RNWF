@@ -28,7 +28,7 @@ static uint8_t subCnt;
 void APP_AZURE_BUTTON_Telemetry(uint32_t press_count)
 {            
     snprintf(app_buf, sizeof(app_buf), AZURE_FMT_BUTTON_TEL, press_count);
-    printf("[Telemetry] button presses = %d\r\n", press_count);
+    printf("[Telemetry] SW0 button press count = %d\r\n", press_count);
     APP_MQTT_Publish(AZURE_PUB_TELEMETRY, app_buf);
 }
 
@@ -83,7 +83,6 @@ void APP_AZURE_Task(void)
         if(!(g_SysTickCount % g_ReportRate))
         {
             APP_AZURE_COUNTER_Telemetry(counter++);
-            APP_AZURE_BUTTON_Telemetry(press_count);
         }
                                            
         if(g_RebootDelay > 0)
@@ -97,7 +96,7 @@ void APP_AZURE_Task(void)
     
     if(g_ButtonPress)
     {        
-        APP_AZURE_BUTTON_Telemetry(press_count++);
+        APP_AZURE_BUTTON_Telemetry(++press_count);
         g_ButtonPress = 0;
     }
          
