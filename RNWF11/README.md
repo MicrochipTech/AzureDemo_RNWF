@@ -29,7 +29,7 @@ The RNWF UART to Cloud Add On Board offers:
 
 * Serial-to-Cloud Bridge Accessory Board: [RNWF UART to Cloud Add On Board]()
 
-    <img src=".//media/boards/drawings/RNWF11 Add On Board [Horizontal].png" width=500/>
+    <img src=".//media/boards/drawings/RNWF11 Add On Board [Horizontal].png" width=400/>
 
 ## Software Prerequisites & Installation
 
@@ -131,7 +131,9 @@ pip3 install pyserial
 
 **Note** If the development board is not responding to the script's commands, kill the python operation, power cycle the development board, and re-run the script
 
-#### 2.10 Disconnect the Type-C USB cable from the RNWF UART to Cloud Add On Board and move the jumper so that it is shorting the two pins closest to the LED.
+#### 2.10 Disconnect the Type-C USB cable from the RNWF UART to Cloud Add On Board and then **move** the jumper so that it is shorting the two pins closest to the `PWR` LED.
+
+<img src=".//media/boards/RNWF11_Power_VCC.png" width=500/>
 
 ### Step 3 - Create an Azure IoT Central Cloud Application
 

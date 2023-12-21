@@ -63,9 +63,9 @@
 
 10. Right-click on the active project and select `Clean`. Right-click the project again and select `Make and Program Device`. This operation will automatically build the project before attempting to program the target device.
 
-13. After the `BUILD SUCCESSFUL` message appears in the Output window, the application HEX file will be programmed onto the development Board. Once programming has finished, the board will automatically reset and start running its application code.
+11. After the `BUILD SUCCESSFUL` message appears in the Output window, the application HEX file will be programmed onto the development Board. Once programming has finished, the board will automatically reset and start running its application code.
 
-14. Observe the debug messages that are being continuously output to the terminal window. On every firmware reset, the AVR128DB48 will query the RNWF11PC module for information on its Wi-Fi configuration and the names of all certificates and keys which are currently stored in the module's internal memory. Successful responses from the RNWF11PC module should look something like the following terminal window messages:
+12. Observe the debug messages that are being continuously output to the terminal window. On every firmware reset, the AVR128DB48 will query the RNWF11PC module for information on its Wi-Fi configuration and the names of all certificates and keys which are currently stored in the module's internal memory. Successful responses from the RNWF11PC module should look something like the following terminal window messages:
 
     <img src=".//media/RNWF_Responses_Good.png" width=900 />
 
@@ -75,42 +75,42 @@
 
     Whenever these communication issues are observed between the Host MCU and RNWF11PC module, try resetting the AVR128DB48 Host MCU by holding down the `SW0` user button for at least 5 seconds and then releasing the button. If the RNWF11PC module still fails to respond to the read commands, try cycling power to the RNWF11PC Add On Board before resetting the AVR128DB48 Curiosity Nano board.
 
-15. Assuming the RNWF11PC module successfully responded to each of the queries for Wi-Fi configuration, certificate file names, and key file names, it may take 1-2 minutes to establish the connections with both the Device Provisioning Service (DPS) and the IoT Hub used by the IoT Central application. Upon successful registration with DPS and connection to IoT Hub, the terminal output messages should look something like the following:
+13. Assuming the RNWF11PC module successfully responded to each of the queries for Wi-Fi configuration, certificate file names, and key file names, it may take 1-2 minutes to establish the connections with both the Device Provisioning Service (DPS) and the IoT Hub used by the IoT Central application. Upon successful registration with DPS and connection to IoT Hub, the terminal output messages should look something like the following:
 
     <img src=".//media/Connection_Messages.png" width=800 />
 
-16. The connection to Azure IoT Central is successful if telemetry messages are being continuously output to the terminal window. If the program appears to stall during the connection process (e.g. minutes of inactivity in the terminal window), you can hold down the `SW0` user button on the AVR128DB48 Curiosity Nano board for at least 5 seconds and then release the button to trigger a software reset. It may also be necessary to cycle power to the RNWF11PC Add On Board before resetting the AVR128DB48 Curiosity Nano board.
+14. The connection to Azure IoT Central is successful if telemetry messages are being continuously output to the terminal window. If the program appears to stall during the connection process (e.g. minutes of inactivity in the terminal window), you can hold down the `SW0` user button on the AVR128DB48 Curiosity Nano board for at least 5 seconds and then release the button to trigger a software reset. It may also be necessary to cycle power to the RNWF11PC Add On Board before resetting the AVR128DB48 Curiosity Nano board.
 
     <img src=".//media/Terminal_Output.png" width=1000/>
 
-17. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
+15. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
 
-18. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
+16. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
 
-19. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
+17. Using the left-hand navigation pane, click on `Devices` under **Connect**, and then click on your device name
 
     <img src=".//media/image89.png" width=1000 />
 
-20. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
+18. Confirm that telemetry messages are being continuously received from the device by clicking on the **Raw Data** tab. Note the date/time each message was received - you should be seeing messages being continuously received during the present day/time.
 
     <img src=".//media/image90b.png" width=1000 />
 
-21. Try pressing the `SW0` mechanical button on the Curiosity Nano board and see if the number of presses is being output to the terminal window. Refresh the **Raw Data** tab in the Device view and observe the button event data has been received as a telemetry event.
+19. Try pressing the `SW0` mechanical button on the Curiosity Nano board and see if the number of presses is being output to the terminal window. Refresh the **Raw Data** tab in the Device view and observe the button event data has been received as a telemetry event.
 
     <img src=".//media/Telemetry_RawData.png" width=1000/>
 
-22. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
+20. Click on the **Properties** tab. Select one of the 3 options for the property `LED0` and click on the **Save** icon. Observe that the `LED0` on the AVR128DB48 Curiosity Nano Board behaves in the expected mode.
 
     <img src=".//media/boards/AVR128DB48_LED0.png" width=500 />
 
     Try changing the state of the `LED0` to switch between the Off, On, and Blinking modes. The Telemetry Reporting Rate can also be adjusted to change the period (in seconds) for sending the continuous telemetry reports.
 
-23. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
+21. Click on the **Commands** view. Type any text message in the "Message to echo" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that the correct message was echoed from the device.
 
     <img src=".//media/image92.png" width=400 />
     <img src=".//media/image93.png" width=300 />
 
-24. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
+22. Click on the **Commands** view. Type `PT5S` in the "Delay before reboot operation" box and then click on the **Run** button. To see the response from the device, click on the **command history** link (located just underneath the **Run** button). You should see that the response was received "now" (i.e. within the last minute) and that a success message was received from the device.
 
     <img src=".//media/image94.png" width=400 />
     <img src=".//media/image95.png" width=300 />
@@ -121,13 +121,5 @@
         'T'ime 
          5
         'S'econds
-
-25. At this point, assuming everything is working as described, you can see if your USB hub can supply enough current to power both boards using just the single USB cable connected to the AVR128DB48 Curiosity Nano. Disconnect the USB Type-C cable from the RNWF11PC Add On Board. Move the jumper so that the 2 pins furthest away from the module are shorted.
-
-    <img src=".//media/boards/RNWF11_Power_VCC.png" width=500/>
-
-26. Reset the AVR128DB48 Curiosity Nano by disconnecting and reconnecting the USB cable, or by holding down the `SW0` user button for at least 5 seconds and then releasing the button. Hopefully the entire connection process repeats successfully as shown in the following example terminal output!
-
-    <img src=".//media/Terminal_Output.png" width=1000/>
 
 NOTE: You can access any of your IoT Central applications in the future by logging into the [IoT Central Portal](https://apps.azureiotcentral.com).
