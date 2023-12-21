@@ -117,7 +117,7 @@ pip3 uninstall pyserial
 pip3 install pyserial
 ```
 
-#### 2.7 The **Client** certificate can be read out of the WFI32 module by executing the `RNWF11_ReadCert_Client_<YOURINITIALS>.py` script in the [/cert-read-tool](./cert-read-tool/) directory. The certificate file will be named based on the device's Common Name (i.e. `<COMMON_NAME>_client.pem`). Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
+#### 2.7 The **Client** certificate can be read out of the RNWF11 module by executing the `RNWF11_ReadCert_Client_<YOURINITIALS>.py` script in the [/cert-read-tool](./cert-read-tool/) directory. The certificate file will be named based on the device's Common Name (i.e. `<COMMON_NAME>_client.pem`). Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
 
     python3 RNWF11_ReadCert_Client_<YOURINITIALS>.py
 
@@ -125,7 +125,7 @@ pip3 install pyserial
 
 #### 2.8 Write down the "Common Name" (aka Device ID) that was generated as part of the name of the newly-created client PEM file (e.g. "sn01237348B762507701"). This "device label" is basically the name of the device that is generated based on a unique serial number that is pre-programmed in a secure element that's built into the RNWF11 module. You will need to enter in this label as the "Device ID" value in the demonstration firmware in a future step.
 
-#### 2.9 The **Signer** certificate can be read out of the WFI32 module by executing the `RNWF11_ReadCert_Signer_<YOURINITIALS>.py` script in the [/cert-read-tool](./cert-read-tool/) directory. The certificate file will be named `<COMMON_NAME>_signer.pem`. Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
+#### 2.9 The **Signer** certificate can be read out of the RNWF11 module by executing the `RNWF11_ReadCert_Signer_<YOURINITIALS>.py` script in the [/cert-read-tool](./cert-read-tool/) directory. The certificate file will be named `<COMMON_NAME>_signer.pem`. Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
 
     python3 RNWF11_ReadCert_Signer_<YOURINITIALS>.py
 
