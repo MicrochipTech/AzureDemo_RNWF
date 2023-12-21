@@ -164,7 +164,7 @@ NOTE: You can access any of your IoT Central applications in the future by signi
 
 Click on one of the following test procedures for the specific Curiosity Nano Evaluation Kit currently being used for this demonstration:
 
-* [AVR128DB48](./AVR128DB48_RNWF02PC.md)
+* [AVR128DB48 Curiosity Nano](./AVR128DB48_RNWF11PC.md)
 
 ## References
 
