@@ -29,7 +29,7 @@ The RNWF UART to Cloud Add On Board offers:
 
 * Serial-to-Cloud Bridge Accessory Board: [RNWF UART to Cloud Add On Board]()
 
-    <img src=".//media/boards/RNWF11PC_Add_On_Board.png" width=300/>
+    <img src=".//media/boards/drawings/RNWF11 Add On Board [Horizontal].png" width=500/>
 
 ## Software Prerequisites & Installation
 
