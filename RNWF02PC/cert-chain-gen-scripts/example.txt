@@ -1,6 +1,0 @@
-$ bash create_initial_setup.sh
-
-$ bash create_device_certificate.sh
-
-$ openssl x509 -in rnwf02_device_01.pem -noout -enddate
-

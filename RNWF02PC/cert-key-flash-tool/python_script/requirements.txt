@@ -1,2 +1,0 @@
-pyserial==3.5
-xmodem==0.4.6
