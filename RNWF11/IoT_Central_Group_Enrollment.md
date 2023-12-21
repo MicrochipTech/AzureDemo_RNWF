@@ -12,14 +12,10 @@
 
    <img src=".//media/image82.png" width = 400 />
 
-4. Click on `+ Add certificate` and browse to the **signer** certificate file (e.g. the file named `subca.crt` located in the [subca](./cert-chain-gen-scripts/subca/) sub-folder). Click the `Upload` button (then click on `Close` when the certificate has been accepted)
+4. Click on `+ Add certificate` and browse to the **signer** certificate file. Click the `Upload` button (then click on `Close` when the certificate has been accepted)
 
    <img src=".//media/image76.png" width = 400 />
 
-5. Optionally, a secondary root or intermediate certificate can be uploaded as well
-
-   <img src=".//media/image77.png" width = 400 />
-
-6. Click on the `Save` icon at the top of the page, and note the ID Scope which was created for the enrollment group. Now, any leaf certificate that was derived from the signer certificate will be allowed to automatically enroll with the DPS ID scope associated with the IoT Central application. The X.509 enrollment group has been successfully created and should be ready to go!
+5. Click on the `Save` icon at the top of the page, and note the ID Scope which was created for the enrollment group. Now, any leaf certificate that was derived from the signer certificate will be allowed to automatically enroll with the DPS ID scope associated with the IoT Central application. The X.509 enrollment group has been successfully created and should be ready to go!
 
     <img src=".//media/image78.png" width = 400 />

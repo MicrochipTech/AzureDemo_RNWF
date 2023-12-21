@@ -65,7 +65,7 @@ For enabling secure connections with cloud services such as AWS and Azure, a cha
 
 The device (client) certificate file will be needed when we create the device in Azure IoT Central using the individual enrollment method. Another option is to use the group enrollment method which requires uploading the signer certificate file (or in some cases, could be the root certificate if the client certificate is chained directly to the Root CA) to the Azure IoT Central application, so that any device which presents a leaf certificate that was derived from the signer (or root) certificate will automatically be granted access to registration (which is governed by the Device Provisioning Service linked to the IoT Hub that's used by an IoT Central application).
 
-#### 2.1 Standalone Configuration
+#### 2.1 RNWF Direct Communication with a PC over USB
 
 - Install a jumper to short the two pins that are **furthest** away from the `PWR` LED on the RNWF UART to Cloud Add On Board.
 
@@ -87,15 +87,21 @@ ls /dev/tty.usb*
 ```
 to see a list of all USB devices which have been assigned to serial ports - most likely one of them is the string that will be assigned to the `COM_PORT` variable in the script
 
-#### 2.3 Navigate to the [/cert-read-tool](./cert-read-tool) directory. Create a copy of the `RNWF11_ReadCert_Signer.py` file and rename it to something more specific (e.g. `RNWF11_ReadCert_Signer_<YOURINITIALS>.py` (in order to preserve the original baseline script in case you need to reference it again in the future)
+#### 2.3 Launch a Command Prompt or PowerShell window (ideally as an Administrator) and execute the following 2 command lines in order to remove any previous installation of the `pyserial` Python package and then reinstall the latest package (if `pip3` is not a recognized command, try `pip`):
 
-#### 2.4 Using the text editor of your choice, open the newly-created `RNWF11_ReadCert_Signer_<YOURINITIALS>.py` file and locate the following line towards the top of the file:
+```bash
+pip3 uninstall pyserial
+
+pip3 install pyserial
+```
+
+#### 2.4 Navigate to the [/cert-read-tool](./cert-read-tool) directory. Using the text editor of your choice, open the `RNWF11_ReadCert_Signer.py` file and locate the following line towards the top of the file:
 
 ```bash
 COM_PORT = "your_COM_Port"
 ```
 
-Edit this line to reflect the Virtual COM port associated with your RNWF11's serial connection and save your changes to the script. For example, if the Windows Device Managers shows the USB Serial Device is associated with `COM4`, then the line would need to be changed to look like the following:
+Edit this line to reflect the Virtual COM port associated with your RNWF board's serial connection and save your changes to the script. For example, if the Windows Device Managers shows the USB Serial Device is associated with `COM4`, then the line would need to be changed to look like the following:
 
 ```bash
 COM_PORT = "COM4"
@@ -107,31 +113,23 @@ Alternatively for MacOS users - the COM_PORT setting may look something like
 COM_PORT = "/dev/tty.usbmodem1433201"
 ```
 
-#### 2.5 Navigate to the [/cert-read-tool](./cert-read-tool/) directory. Create a copy of the `RNWF11_ReadCert_Client.py` script and repeat the same process for renaming the file and then setting the `COM_PORT` variable. After saving the changes to the new file, close the file and then reopen the file to confirm that the COM port was correctly updated.
+#### 2.5 The **Signer** certificate can now be read out of the RNWF11 module by executing the `RNWF11_ReadCert_Signer.py` script in the [/cert-read-tool](./cert-read-tool/) directory. The certificate file that is generated will be named `<COMMON_NAME>_signer.pem`. Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
 
-#### 2.6 Launch a Command Prompt or PowerShell window (ideally as an Administrator) and execute the following 2 command lines in order to remove any previous installation of the `pyserial` Python package and then reinstall the latest package (if `pip3` is not a recognized command, try `pip`):
-
-```bash
-pip3 uninstall pyserial
-
-pip3 install pyserial
-```
-
-#### 2.7 The **Client** certificate can be read out of the RNWF11 module by executing the `RNWF11_ReadCert_Client_<YOURINITIALS>.py` script in the [/cert-read-tool](./cert-read-tool/) directory. The certificate file will be named based on the device's Common Name (i.e. `<COMMON_NAME>_client.pem`). Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
-
-    python3 RNWF11_ReadCert_Client_<YOURINITIALS>.py
+    python3 RNWF11_ReadCert_Signer.py
 
 **Note** If the development board is not responding to the script's commands, kill the python operation, power cycle the development board, and re-run the script
 
-#### 2.8 Write down the "Common Name" (aka Device ID) that was generated as part of the name of the newly-created client PEM file (e.g. "sn01237348B762507701"). This "device label" is basically the name of the device that is generated based on a unique serial number that is pre-programmed in a secure element that's built into the RNWF11 module. You will need to enter in this label as the "Device ID" value in the demonstration firmware in a future step.
+#### 2.6 In the same [/cert-read-tool](./cert-read-tool/) directory, edit the `RNWF11_ReadCert_Client.py` file and update the `COM_PORT` variable. After saving the changes to the new file, close the file and then reopen the file to confirm that the COM port was correctly set.
 
-#### 2.9 The **Signer** certificate can be read out of the RNWF11 module by executing the `RNWF11_ReadCert_Signer_<YOURINITIALS>.py` script in the [/cert-read-tool](./cert-read-tool/) directory. The certificate file will be named `<COMMON_NAME>_signer.pem`. Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
+#### 2.7 The **Client** certificate can now be read out of the RNWF11 module by executing the `RNWF11_ReadCert_Client.py` script in the [/cert-read-tool](./cert-read-tool/) directory. The certificate file that is generated will be named based on the device's Common Name (i.e. `<COMMON_NAME>_client.pem`). Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
 
-    python3 RNWF11_ReadCert_Signer_<YOURINITIALS>.py
+    python3 RNWF11_ReadCert_Client.py
 
 **Note** If the development board is not responding to the script's commands, kill the python operation, power cycle the development board, and re-run the script
 
-#### 2.10 Disconnect the Type-C USB cable from the RNWF UART to Cloud Add On Board and then **move** the jumper so that it is shorting the two pins closest to the `PWR` LED.
+#### 2.8 Write down the "Common Name" (aka "Device ID") that was generated as part of the name of the newly-created client PEM file (e.g. "sn01237348B762507701"). This "Device ID" is basically the name of the device that is generated based on a unique serial number that is pre-programmed in a secure element that's built into the RNWF11 module. You will need to enter in this label as the "Device ID" value in the demonstration firmware in a future step.
+
+#### 2.9 Disconnect the Type-C USB cable from the RNWF UART to Cloud Add On Board and then **move** the jumper so that it is shorting the two pins closest to the `PWR` LED.
 
 <img src=".//media/boards/RNWF11_Power_VCC.png" width=500/>
 

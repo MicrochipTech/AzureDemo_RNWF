@@ -21,7 +21,7 @@ The Connect button will open the device connection dialog.  Several items are ac
 
 6. Select the *Authentication method* as "Certificates (X.509)"
 
-7. Select the file folder icon for the Primary certificate and upload your device certificate PEM file (e.g. `<Common_Name>.pem`). For example, if using the provided example chain of trust, choose the file named "rnwf02_device_01.pem" located in the [rnwf02_device_01](./cert-chain-gen-scripts/devcerts/rnwf02_device_01/) sub-folder.
+7. Select the file folder icon for the Primary certificate and upload your device certificate PEM file (e.g. `<COMMON_NAME>_client.pem`).
 
 8. Select the file folder icon for the Secondary certificate, and upload the same PEM file used for the Primary. Both the Primary and Secondary certificates have to be uploaded to save the Device connection group settings, which is why the same PEM file is uploaded twice.
 
