@@ -29,7 +29,7 @@ The RNWF UART to Cloud Add On Board offers:
 
 * Serial-to-Cloud Bridge Accessory Board: [RNWF UART to Cloud Add On Board]()
 
-    <img src=".//media/boards/drawings/RNWF11 Add On Board [Horizontal].png" width=400/>
+    <img src=".//media/boards/drawings/RNWF_Add_On [Horizontal].png" width=400/>
 
 ## Software Prerequisites & Installation
 
@@ -67,7 +67,7 @@ The device (client) certificate file will be needed when we create the device in
 
 #### 2.1 RNWF Direct Communication with a PC over USB
 
-- Install a jumper to short the two pins that are **furthest** away from the `PWR` LED on the RNWF UART to Cloud Add On Board.
+- Install a jumper on the 3-pin header (most likely labeled `J5`) to short the two pins that are **furthest** away from the `PWR` LED on the RNWF UART to Cloud Add On Board. The middle pin should be shorted with the pin labeled `PC3V3` towards the right side of the board.
 
     <img src=".//media/boards/RNWF11_Power_USB.png" width=500/>
 
@@ -129,7 +129,7 @@ COM_PORT = "/dev/tty.usbmodem1433201"
 
 #### 2.8 Write down the "Common Name" (aka "Device ID") that was generated as part of the name of the newly-created client PEM file (e.g. "sn01237348B762507701"). This "Device ID" is basically the name of the device that is generated based on a unique serial number that is pre-programmed in a secure element that's built into the RNWF11 module. You will need to enter in this label as the "Device ID" value in the demonstration firmware in a future step.
 
-#### 2.9 Disconnect the Type-C USB cable from the RNWF UART to Cloud Add On Board and then **move** the jumper so that it is shorting the two pins closest to the `PWR` LED.
+#### 2.9 Disconnect the Type-C USB cable from the RNWF UART to Cloud Add On Board and then **move** the jumper so that it is shorting the two pins **closest** to the `PWR` LED. The middle pin of the 3-pin header should be shorted with the pin labeled `HOST3V3` towards the left side of the board.
 
 <img src=".//media/boards/RNWF11_Power_VCC.png" width=500/>
 
