@@ -2,7 +2,7 @@
 
 1. Install the AVR128DB48 Curiosity Nano Evaluation Kit & RNWF UART to Cloud Add On Board onto the Curiosity Nano Adapter base board as shown
 
-    <img src=".//media/boards/AVR128DB48_CNANO_RNWF02_Top.png" width=500/>
+    <img src=".//media/boards/AVR128DB48_CNANO_RNWF11_Top.png" width=500/>
     <img src=".//media/boards/AVR128DB48_RNWF02PC.png" width=500/>
 
 2. Use a micro-USB cable to connect the Curiosity Nano board directly to one of your PC's standard USB ports

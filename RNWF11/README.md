@@ -29,7 +29,7 @@ The RNWF UART to Cloud Add On Board offers:
 
 * Serial-to-Cloud Bridge Accessory Board: [RNWF UART to Cloud Add On Board]()
 
-    <img src=".//media/boards/drawings/RNWF_Add_On [Horizontal].png" width=400/>
+    <img src=".//media/boards/drawings/RNWF_Add_On_HQ [Horizontal].png" width=400/>
 
 ## Software Prerequisites & Installation
 
@@ -69,11 +69,11 @@ The device (client) certificate file will be needed when we create the device in
 
 - Install a jumper on the 3-pin header (most likely labeled `J5`) to short the two pins that are **furthest** away from the `PWR` LED on the RNWF UART to Cloud Add On Board. The middle pin should be shorted with the pin labeled `PC3V3` towards the right side of the board.
 
-    <img src=".//media/boards/RNWF11_Power_USB.png" width=500/>
+    <img src=".//media/boards/RNWF11_Power_USB.png" width=400/>
 
 - Use a USB Type-C cable to connect the RNWF UART to Cloud Add On Board to the Host PC. Confirm that the `PWR` LED on the board stays constantly on.
 
-    <img src=".//media/boards/RNWF11_to_PC.png" width=500/>
+    <img src=".//media/boards/RNWF11_to_PC.png" width=300/>
 
 #### 2.2 Virtual COM Port Discovery
 
@@ -101,7 +101,7 @@ pip3 install pyserial
 COM_PORT = "your_COM_Port"
 ```
 
-Edit this line to reflect the Virtual COM port associated with your RNWF board's serial connection and save your changes to the script. For example, if the Windows Device Managers shows the USB Serial Device is associated with `COM4`, then the line would need to be changed to look like the following:
+Edit this line to reflect the Virtual COM port associated with your RNWF board's serial connection and save your changes to the script. For example, if the Windows Device Manager shows the USB Serial Device is associated with `COM4`, then the line would need to be changed to look like the following:
 
 ```bash
 COM_PORT = "COM4"
@@ -131,7 +131,7 @@ COM_PORT = "/dev/tty.usbmodem1433201"
 
 #### 2.9 Disconnect the Type-C USB cable from the RNWF UART to Cloud Add On Board and then **move** the jumper so that it is shorting the two pins **closest** to the `PWR` LED. The middle pin of the 3-pin header should be shorted with the pin labeled `HOST3V3` towards the left side of the board.
 
-<img src=".//media/boards/RNWF11_Power_VCC.png" width=500/>
+<img src=".//media/boards/RNWF11_Power_VCC.png" width=400/>
 
 ### Step 3 - Create an Azure IoT Central Cloud Application
 
