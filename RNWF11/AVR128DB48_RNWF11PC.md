@@ -1,6 +1,6 @@
 # Test Device Interaction with the Cloud Application (AVR128DB48 Curiosity Nano)
 
-1. Install the AVR128DB48 Curiosity Nano Evaluation Kit & RNWF UART to Cloud Add On Board onto the Curiosity Nano Adapter base board as shown
+1. Install the AVR128DB48 Curiosity Nano Evaluation Kit & RNWF UART to Cloud Add On Board onto the top of the Curiosity Nano Adapter base board as shown
 
     <img src=".//media/boards/AVR128DB48_CNANO_RNWF11_Top.png" width=500/>
     <img src=".//media/boards/AVR128DB48_RNWF02PC.png" width=500/>
