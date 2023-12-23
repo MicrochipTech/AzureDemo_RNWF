@@ -53,8 +53,8 @@
 
 /* Wi-Fi Configuration */
 
-#define HOME_AP_SSID        "NETGEAR51"
-#define HOME_AP_PASSPHRASE  "melodicship232"
+#define HOME_AP_SSID        "<YOUR_WIFI_SSID>"
+#define HOME_AP_PASSPHRASE  "<YOUR_WIFI_PSWD>"
 #define HOME_AP_SECURITY     RNWF_WPA2_MIXED
 
 #ifdef RNWF11_SERVICE
@@ -95,10 +95,10 @@ typedef enum {
 #endif
 
 /* Cloud Configuration */
-#define CLIENT_ID         "sn01237348B762507701"
-#define AZURE_SCOPE_ID          "0ne00AAE0D0"
-#define AZURE_PUB_TELEMETRY     "devices/"CLIENT_ID"/messages/events/"
+#define CLIENT_ID               "<YOUR_COMMON_NAME>" // e.g. "sn01237348B762507701"
+#define AZURE_SCOPE_ID          "<YOUR_ID_SCOPE>" // e.g. "0ne00AAE0D0"
 #define AZURE_MODEL_ID          "dtmi:com:Microchip:AVR128DB48_CNANO;1"
+#define AZURE_PUB_TELEMETRY     "devices/"CLIENT_ID"/messages/events/"
 
 #ifdef RNWF11_SERVICE
 #define RNWF_TLS_USE_ECC608 1
@@ -118,10 +118,8 @@ typedef enum {
 #ifdef RNWF11_SERVICE
 #define AZURE_FMT_BUTTON_TEL    "{\\\"buttonEvent\\\": {\\\"button_name\\\":\\\"SW0\\\", \\\"press_count\\\":%d}"
 
-//#define AZURE_FMT_RATE_PROP     "{\\\"reportRate\\\":{\\\"ac\\\":200,\\\"av\\\":%s,\\\"ad\\\":\\\"success\\\",\\\"value\\\":%s}}"
-#define AZURE_FMT_RATE_PROP     "{\\\"reportRate\\\": 1}"
-//#define AZURE_FMT_LED0_PROP     "{\\\"LED0\\\":{\\\"ac\\\":200,\\\"av\\\":%s,\\\"ad\\\":\\\"success\\\",\\\"value\\\":%s}}"
-#define AZURE_FMT_LED0_PROP     "{\\\"LED0\\\": 1}"
+#define AZURE_FMT_RATE_PROP     "{\\\"reportRate\\\":{\\\"ac\\\":200,\\\"av\\\":%s,\\\"ad\\\":\\\"success\\\",\\\"value\\\":%s}}"
+#define AZURE_FMT_LED0_PROP     "{\\\"LED0\\\":{\\\"ac\\\":200,\\\"av\\\":%s,\\\"ad\\\":\\\"success\\\",\\\"value\\\":%s}}"
 #define AZURE_FMT_DELAY_RSP     "{\\\"status\\\":\\\"Success\\\",\\\"delay\\\":%d}"
 #define AZURE_FMT_ECHO_RSP      "{\\\"echoString\\\":\\\"%s\\\"}"
 

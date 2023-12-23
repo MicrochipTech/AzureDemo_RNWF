@@ -127,7 +127,7 @@ void APP_SW_Handler(void)
 void APP_AZURE_BUTTON_Telemetry(uint32_t press_count)
 {            
     snprintf(app_buf, sizeof(app_buf), AZURE_FMT_BUTTON_TEL, press_count);
-    printf("Telemetry ->> buttonEvent count %d\r\n", press_count);
+    printf("[TELEMETRY] button press count = %d\r\n", press_count);
     APP_MQTT_Publish(AZURE_PUB_TELEMETRY, app_buf);
 }
 #endif
@@ -135,28 +135,32 @@ void APP_AZURE_BUTTON_Telemetry(uint32_t press_count)
 void APP_AZURE_COUNTER_Telemetry(uint32_t counter)
 {            
     snprintf(app_buf, sizeof(app_buf), AZURE_FMT_COUNTER_TEL, counter);
-    printf("Telemetry ->> counter count %d\r\n", counter);
+    printf("[TELEMETRY] counter = %d\r\n", counter);
     APP_MQTT_Publish(AZURE_PUB_TELEMETRY, app_buf);
 }
 
 #ifdef RNWF11_SERVICE
 void APP_LED_STATE_Handler(APP_LED_STATE_t ledState)
 {
-    printf("LED State = %d\r\n", ledState);
+    printf("[PROPERTY] LED state = ", ledState);
     switch(ledState)
     {
         case APP_LED_BLINK:
+            printf("Blinking");
             TCA1_Interface.Start();
             break;
         case APP_LED_OFF:
+            printf("Off");
             TCA1_Interface.Stop();
             LED_SetHigh();
             break;
         case APP_LED_ON:
+            printf("On");
             TCA1_Interface.Stop();
             LED_SetLow();
             break;
-    }   
+    }
+    printf("\r\n");
 }
 #endif
 
@@ -207,7 +211,9 @@ void APP_AZURE_Task(void)
         if(!(g_SysTickCount % g_ReportRate))
         {
             APP_AZURE_COUNTER_Telemetry(counter++);     //this will continuously trigger telemetry action
+#ifdef _ELIMINATE
             APP_AZURE_BUTTON_Telemetry(press_count);
+#endif /* _ELIMINATE */
         }
 
         if(g_RebootDelay > 0)
@@ -265,7 +271,7 @@ void APP_AZURE_SUB_Handler(char *p_str)
                 end_ptr = (char *)strstr(reboot_ptr, "S\"}");
                 *end_ptr = '\0';
                 g_RebootDelay = atoi((char *)reboot_ptr+strlen(AZURE_DEALY_TAG));
-                printf("Reboot delay = %d Sec\r\n", g_RebootDelay);
+                printf("[COMMAND] Reboot delay = %d sec\r\n", g_RebootDelay);
                 sprintf(app_buf+pubLen, AZURE_FMT_DELAY_RSP, g_RebootDelay);                
                 APP_MQTT_Publish(app_buf, app_buf+pubLen);
             }
@@ -274,7 +280,7 @@ void APP_AZURE_SUB_Handler(char *p_str)
                 echo_ptr += strlen(AZURE_ECHO_TAG);
                 end_ptr = (char *)strstr(echo_ptr, "\\\"}");
                 *end_ptr = '\0';            
-                printf("Echo = %s\r\n", echo_ptr);
+                printf("[COMMAND] Echo string = %s\r\n", echo_ptr);
                 sprintf(app_buf+pubLen, AZURE_FMT_ECHO_RSP, echo_ptr);                
                 APP_MQTT_Publish(app_buf, app_buf+pubLen);
             }
@@ -299,32 +305,36 @@ void APP_AZURE_SUB_Handler(char *p_str)
                 led_ptr += strlen(AZURE_LED0_TAG);
                 end_ptr = (char *)strstr(led_ptr, " \\");
                 *end_ptr = '\0';
-                sprintf(app_buf, AZURE_FMT_LED0_PROP);
+                sprintf(app_buf, AZURE_FMT_LED0_PROP, ver_ptr, led_ptr); 
                 APP_LED_STATE_Handler(atoi(led_ptr));
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
+#ifdef _ELIMINATE
             else
             {
                 sprintf(app_buf, AZURE_FMT_LED0_PROP);
                 APP_LED_STATE_Handler(2);
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
+#endif /* _ELIMINATE */
             if(rate_ptr != NULL)
             {
                 rate_ptr += strlen(AZURE_RATE_TAG);
                 end_ptr = (char *)strstr(rate_ptr, " \\");
                 *end_ptr = '\0';
-                sprintf(app_buf, AZURE_FMT_RATE_PROP);
+                sprintf(app_buf, AZURE_FMT_RATE_PROP, ver_ptr, rate_ptr);
                 g_ReportRate = atoi(rate_ptr) * APP_SYS_TICK_COUNT_1SEC;
-                printf("Report Rate =  %d \r\n", g_ReportRate);
+                printf("[PROPERTY] Telemetry report rate = %d sec\r\n", (g_ReportRate/1000));
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
+#ifdef _ELIMINATE
             else
             {
                 sprintf(app_buf, AZURE_FMT_RATE_PROP);
-                printf("Report Rate =  %d \r\n", g_ReportRate);
+                printf("Report Rate = %d msec \r\n", g_ReportRate);
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
+#endif /* _ELIMINATE */
         }
 #endif
     }
@@ -413,7 +423,8 @@ void APP_WIFI_Callback(RNWF_WIFI_EVENT_t event, uint8_t *p_str)
 #ifdef RNWF11_SERVICE
                 TCA1_Interface.PeriodCountSet(APP_LED_TCA1_PER_TICK<<1);
 #endif
-                printf("Connecting to the Cloud\r\n");
+                printf("Attempting connection to the Azure cloud\r\n");
+                printf("Please wait...\r\n");
                 RNWF_MQTT_SrvCtrl(RNWF_MQTT_SET_CALLBACK, APP_MQTT_Callback);
                 RNWF_MQTT_SrvCtrl(RNWF_MQTT_CONFIG, (void *)&mqtt_cfg);
                 RNWF_MQTT_SrvCtrl(RNWF_MQTT_CONNECT, NULL);
@@ -423,7 +434,7 @@ void APP_WIFI_Callback(RNWF_WIFI_EVENT_t event, uint8_t *p_str)
         }
         case RNWF_CONNECTED:
         {
-            printf("Wi-Fi Connected\n");
+            printf("[Wi-Fi] Connected to Access Point!!!\n");
             break;
         }
         case RNWF_DISCONNECTED:
@@ -481,7 +492,7 @@ void RNWF_APP_Initialize(void)
  
     /* Wi-Fii Connectivity */
     RNWF_WIFI_PARAM_t wifi_sta_cfg = {RNWF_WIFI_MODE_STA, HOME_AP_SSID, HOME_AP_PASSPHRASE, HOME_AP_SECURITY, 1};    
-    printf("Connecting to %s\r\n", HOME_AP_SSID);
+    printf("[Wi-Fi] Connecting to SSID = %s\r\n", HOME_AP_SSID);
     RNWF_WIFI_SrvCtrl(RNWF_WIFI_SET_CALLBACK, APP_WIFI_Callback);
     RNWF_WIFI_SrvCtrl(RNWF_SET_WIFI_PARAMS, &wifi_sta_cfg);
 
