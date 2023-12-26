@@ -65,7 +65,7 @@ For enabling secure connections with cloud services such as AWS and Azure, a cha
 
 The device (client) certificate file will be needed when we create the device in Azure IoT Central using the individual enrollment method. Another option is to use the group enrollment method which requires uploading the signer certificate file (or in some cases, could be the root certificate if the client certificate is chained directly to the Root CA) to the Azure IoT Central application, so that any device which presents a leaf certificate that was derived from the signer (or root) certificate will automatically be granted access to registration (which is governed by the Device Provisioning Service linked to the IoT Hub that's used by an IoT Central application).
 
-#### 2.1 Install a jumper on the 3-pin header (most likely labeled `J5`on th e silkscreen) to short the two pins that are **furthest** away from the `PWR` LED on the RNWF UART to Cloud Add On Board. The middle pin should be shorted with the pin labeled `PC3V3` towards the right side of the board. This jumper setting configures the board to draw power directly from the USB Type-C connector.
+#### 2.1 Install a jumper on the 3-pin header (most likely labeled `J5`on the silkscreen) to short the two pins that are **furthest** away from the `PWR` LED on the RNWF UART to Cloud Add On Board. The middle pin should be shorted with the pin labeled `PC3V3` towards the right side of the board. This jumper setting configures the board to draw power directly from the USB Type-C connector.
 
 <img src=".//media/boards/RNWF11_Power_USB.png" width=400/>
 
@@ -81,14 +81,14 @@ pip3 uninstall pyserial
 pip3 install pyserial
 ```
 
-#### 2.4 Both the **SIGNER** and **CLIENT** X.509 certificates can be easily read out of the RNWF11 module by executing the two Python scripts located in the [/cert-read-tool](./cert-read-tool/) directory. Execute the following commands in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
+#### 2.4 Both the **SIGNER** and **CLIENT** X.509 certificates can be easily read out of the RNWF11 module by executing the two Python scripts located in the [cert-read-tool](./cert-read-tool/) sub-directory. Execute the following commands in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
 
     python3 RNWF11_ReadCert_Signer.py
     python3 RNWF11_ReadCert_Client.py
 
 **Note** If the development board is not responding to the script's commands, kill the python operation, power cycle the development board, and re-run the script
 
-#### 2.5 Note and write down the "Common Name" (aka "Device ID") that was generated as part of the names of the PEM files in the [/cert-read-tool](./cert-read-tool/) directory (e.g. "sn01237348B762507701").
+#### 2.5 Note and write down the "Common Name" (aka "Device ID") that was generated as part of the names of the PEM files in the [cert-read-tool](./cert-read-tool/) sub-directory (e.g. "sn01237348B762507701").
 
 <img src=".//media/Common_Name_PEM.png" width=300/>
 
