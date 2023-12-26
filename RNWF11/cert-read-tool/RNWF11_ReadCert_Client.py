@@ -1,10 +1,86 @@
 import serial
 import time
 import subprocess
+import io
 import os
+from time import sleep
+import serial.tools.list_ports as list_ports
 
-# COM port setting
-COM_PORT = "your_COM_port"
+# Possible VID:PID combinations for FTDI vendors:devices
+dev_dict = [    
+                '0403:6001',
+                '0403:6010',
+                '0403:6011',
+                '0403:0014',
+                '0403:0015',
+                '0403:A9A0',
+                '04D8:00DD',
+                '04D8:00DF',
+                '04D8:810B',
+                '10C4:80A9',
+                '10C4:EA60',
+                '10C4:EA61',
+                '10C4:EA63',
+                '10C4:EA70',
+                '10C4:EA71',
+                '10C4:EA80',
+                '067B:2303',
+                '067B:AAA2',
+                '067B:AAA3'
+]
+
+# Display all active serial ports
+def all_active_serial_ports():
+    ports = list_ports.comports()
+    ftdi_ports = []
+    for port, desc, hwid in sorted(ports):
+        for VID_PID in dev_dict:
+            index = hwid.find(VID_PID)
+            if index != -1:
+                ftdi_ports.append(port)
+    return detect_port(ftdi_ports)
+
+# Find out the FTDI port number for RNWFxx
+def detect_port(ports):
+    for port in ports:
+        output = []
+        try:
+            s = serial.Serial(port=port, baudrate=230400, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=4.0, write_timeout=4.0, inter_byte_timeout=0.5)
+            sleep(0.1)
+            s.write(f'AT+GMM\r\n'.encode('UTF-8'))
+            sleep(0.1)
+            try:
+                while s.in_waiting:
+                    if s.in_waiting == 1:
+                        break
+                    c = s.readline()
+                    c = c.decode('UTF-8').strip('\r\n').replace('+GMM:', '')
+                    output.append(c)
+            except UnicodeDecodeError:
+                pass
+            if len(output) != 0:
+                #RNWF02
+                if (output[1] == '"PIC32MZW2"') or (output[1] == '"RNWF02"') and output[2] == 'OK':    
+                    s.close()
+                    return port
+                #RNWF11
+                elif (output[1] == '"PIC32MZW1"') or (output[1] == '"RNWF11"') and output[2] == 'OK':
+                    s.close()
+                    return port
+            s.close()
+        except serial.SerialException:
+            pass
+    print('Port not detected')
+    raise SystemExit(1)
+
+# Clean the serial response from RNWFxx
+def pretty(command, output, file):
+    output = output.decode('UTF-8')
+    output = output.replace(command,'')
+    output = output.replace(file,'')
+    output = output.split(',')
+    output = output[-1].strip('\n\r\">')
+    return output
 
 class Delay_Non_Blocking:
   def __init__(self):
@@ -50,8 +126,7 @@ class AnyCloud:
         ret_val = self.ser_buf
         self.ser_buf = ""
         return ret_val
-    return ""        
-  
+    return ""
   
   def sm_initialize(self):
       # start initialization
@@ -87,7 +162,6 @@ class AnyCloud:
           return 255
       else:
         return 0
-
     
   def evt_init_error(self):
     self.init_state = 254
@@ -119,8 +193,6 @@ class AnyCloud:
     f.write(cert)
     f.close()
 
-    
-
     print("\r\n\r\nThe common name in the ECC608 certificate is: " + cn + "\r\n")
     
     if os.name == 'posix' :
@@ -148,13 +220,12 @@ class AnyCloud:
       self.dev_cert = received
       self.evt_handler = self.evt_read_certificate
         
-      
   def runApp(self):
 
     #top level app state machine
     if self.app_state == 0:  # start of application
       print("\r\n--------------------------------------------------------------------------------")
-      print("Reading RNWF11 Client Cert")
+      print("Reading RNWF11 Client Certificate")
       print("--------------------------------------------------------------------------------\r\n")
       self.app_state = 1
     
@@ -162,11 +233,7 @@ class AnyCloud:
       init_resp = self.sm_initialize()
       if init_resp == 254 :
         self.app_state = 254
-        
-      
-        
-    
-    
+
     elif self.app_state == 254:
       exit()
       
@@ -178,13 +245,18 @@ class AnyCloud:
       if self.evt_handler != None :
         self.evt_handler()
         self.evt_handler = None  
-  
+
   def __del__(self):
     self.ser.close()
-  
 
+PORT = all_active_serial_ports()
+print(f'\n\nIdentified RNWFxx Port')
+print('-' * 20)
+print(PORT)
+print('-' * 20)
+s = serial.Serial(port=PORT, baudrate=230400, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=None)
 
-ac = AnyCloud(COM_PORT, 230400, False)
+ac = AnyCloud(PORT, 230400, False)
 
 while True:
   
