@@ -6,6 +6,8 @@ import os
 from time import sleep
 import serial.tools.list_ports as list_ports
 
+RNWF11_BAUDRATE = 230400
+
 # Possible VID:PID combinations for FTDI vendors:devices
 dev_dict = [    
                 '0403:6001',
@@ -45,7 +47,7 @@ def detect_port(ports):
     for port in ports:
         output = []
         try:
-            s = serial.Serial(port=port, baudrate=230400, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=4.0, write_timeout=4.0, inter_byte_timeout=0.5)
+            s = serial.Serial(port=port, baudrate=RNWF11_BAUDRATE, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=4.0, write_timeout=4.0, inter_byte_timeout=0.5)
             sleep(0.1)
             s.write(f'AT+GMM\r\n'.encode('UTF-8'))
             sleep(0.1)
@@ -254,11 +256,10 @@ print(f'\n\nIdentified RNWFxx Port')
 print('-' * 20)
 print(PORT)
 print('-' * 20)
-s = serial.Serial(port=PORT, baudrate=230400, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=None)
+s = serial.Serial(port=PORT, baudrate=RNWF11_BAUDRATE, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=None)
 
-ac = AnyCloud(PORT, 230400, False)
+ac = AnyCloud(PORT, RNWF11_BAUDRATE, False)
 
 while True:
   
   ac.runApp()
-   

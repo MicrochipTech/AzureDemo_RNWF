@@ -77,14 +77,12 @@ The device (client) certificate file will be needed when we create the device in
 
 ```bash
 pip3 uninstall pyserial
-
 pip3 install pyserial
 ```
 
-#### 2.4 Both the **SIGNER** and **CLIENT** X.509 certificates can be easily read out of the RNWF11 module by executing the two Python scripts located in the [cert-read-tool](./cert-read-tool/) sub-directory. Execute the following commands in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
+#### 2.4 Both the **SIGNER** and **CLIENT** X.509 certificates can be easily read out of the RNWF11 module by executing a Python script located in the [cert-read-tool](./cert-read-tool/) sub-directory. Execute the following command in a PowerShell or Command Prompt window (if `python3` is not a recognized command, try `python`):
 
-    python3 RNWF11_ReadCert_Signer.py
-    python3 RNWF11_ReadCert_Client.py
+    python3 RNWF11_ReadCerts.py
 
 **Note** If the development board is not responding to the script's commands, kill the python operation, power cycle the development board, and re-run the script
 
