@@ -61,7 +61,6 @@
     - right-click on the `avr128db48_rnwf02` project
     - select `Properties`
     - select `AVR128DB48 Curiosity Nano-SN` under `Connected Hardware Tool`
-    - select the latest version for `CMSIS`
     - select the latest version for `AVR-Dx_DFP`
     - select the latest XC8 version for `Compiler Toolchain`
 

@@ -101,7 +101,7 @@ class Delay_Non_Blocking:
     else:
       return False
 
-class AnyCloud:
+class ReadClientCert:
   def __init__(self, port, baud, debug):
     self.PORT = port
     self.BAUD = baud
@@ -195,7 +195,7 @@ class AnyCloud:
     f.write(cert)
     f.close()
 
-    print("\r\n\r\nThe common name in the ECC608 certificate is: " + cn + "\r\n")
+    print("\r\n\r\nThe Common Name in the client certificate is: " + cn + "\r\n")
     
     if os.name == 'posix' :
       cmd_line = "mv Cert.pem " + cn + "_client.pem"
@@ -231,7 +231,7 @@ class AnyCloud:
       print("--------------------------------------------------------------------------------\r\n")
       self.app_state = 1
     
-    elif self.app_state == 1:  # init AnyCloud
+    elif self.app_state == 1:  # initialization state
       init_resp = self.sm_initialize()
       if init_resp == 254 :
         self.app_state = 254
@@ -256,11 +256,10 @@ print(f'\n\nIdentified RNWFxx Port')
 print('-' * 20)
 print(PORT)
 print('-' * 20)
-s = serial.Serial(port=PORT, baudrate=RNWF11_BAUDRATE, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=None)
+#s = serial.Serial(port=PORT, baudrate=RNWF11_BAUDRATE, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=None)
 
-ac = AnyCloud(PORT, RNWF11_BAUDRATE, False)
+certificate = ReadClientCert(PORT, RNWF11_BAUDRATE, False)
 
 while True:
   
-  ac.runApp()
-
+  certificate.runApp()
