@@ -159,7 +159,7 @@
         <property key="call-prologues" value="false"/>
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
-        <property key="define-macros" value="RNWF11_SERVICE"/>
+        <property key="define-macros" value="RNWF11_SERVICE;RNWF_INTERFACE_DEBUG"/>
         <property key="disable-optimizations" value="false"/>
         <property key="extra-include-directories" value=""/>
         <property key="favor-optimization-for" value="-speed,+space"/>
@@ -180,7 +180,7 @@
         <property key="preprocess-assembler" value="true"/>
         <property key="short-enums" value="true"/>
         <property key="tentative-definitions" value="-fno-common"/>
-        <property key="undefine-macros" value="RNWF_INTERFACE_DEBUG"/>
+        <property key="undefine-macros" value=""/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="verbose" value="false"/>
