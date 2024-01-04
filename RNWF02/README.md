@@ -56,17 +56,37 @@ The RNWF02 Early Access Development Kit offers:
 
 ## Software Prerequisites & Installation
 
-1. [Git](https://git-scm.com/)
-2. [Python 3.0](https://www.python.org/download/releases/3.0/)
-3. Any [Terminal Emulator](https://en.wikipedia.org/wiki/List_of_terminal_emulators) program of your choice
-4. Microchip `MPLAB X` tool chain for embedded code development on 8-bit architecture MCU platforms (IDE & compiler)
+Click on each of the following links to install the specified software component:
+
+1. [Git](https://git-scm.com/downloads) distributed version control system
+
+2. Latest release of [Python](https://www.python.org/downloads/) (during the installation setup sequence (if offered as an option), check the box to add python.exe to the PATH environment variable)
+
+    <img src=".//media//Python_PATH.png" width=400/>
+
+    Once installation has completed, launch a Command Prompt (or PowerShell) window to confirm that one of `python` or `python3` is a recognized operation when entered on the command line; e.g. check the currently installed version of Python
+
+    <img src=".//media//Python_version_CP.png" width=250/>
+    <img src=".//media//Python_version_PS.png" width=335/>
+
+    In some Windows environments, the Python operation may need to be executed as "py -3"
+
+    <img src=".//media//py3_version_CP.png" width=315/>
+    <img src=".//media//py3_version_PS.png" width=335/>
+
+    NOTE: If the command line fails to print out the Python version number, click [here](https://realpython.com/add-python-to-path/) and follow the directions on adding the location of the Python executable to the PATH environment variable used by your Operating System
+
+3. [PIP](https://www.geeksforgeeks.org/how-to-install-pip-on-windows/) Package Management System for Python
+
+4. Any [Terminal Emulator](https://en.wikipedia.org/wiki/List_of_terminal_emulators) program of your choice
+
+5. Microchip `MPLAB X` tool chain for embedded code development on 8-bit architecture MCU platforms (IDE & compiler)
 
     - [MPLAB X IDE](https://www.microchip.com/mplab/mplab-x-ide)
 
     - [MPLAB XC8 Compiler](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers#tabs)
 
         NOTE: This demonstration project was last tested successfully with XC8 v2.45, and in general should work with later versions of the compiler as they become available. If you encounter issues building the project with a newer version of the compiler, it is recommended to download the last known working version from the [MPLAB Development Ecosystem Downloads Archive](https://www.microchip.com/en-us/tools-resources/archives/mplab-ecosystem) (to fall back to the version Microchip successfully tested prior to release). 
-
 
 ## Device Provisioning & Cloud Resources Setup
 

@@ -65,7 +65,6 @@ Click on each of the following links to install the specified software component
 
         NOTE: This demonstration project was last tested successfully with XC8 v2.45, and in general should work with later versions of the compiler as they become available. If you encounter issues building the project with a newer version of the compiler, it is recommended to download the last known working version from the [MPLAB Development Ecosystem Downloads Archive](https://www.microchip.com/en-us/tools-resources/archives/mplab-ecosystem) (to fall back to the version Microchip successfully tested prior to release). 
 
-
 ## Device Provisioning & Cloud Resources Setup
 
 ### Step 1 - Clone this Repository
