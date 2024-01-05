@@ -66,6 +66,10 @@
 
 12. Observe the debug messages that are being continuously output to the terminal window. If there are communication issues observed between the Host MCU and RNWF11PC module, try resetting the AVR128DB48 Host MCU by holding down the `SW0` user button for at least 5 seconds and then releasing the button.
 
+    NOTE: Whenever the MCU resets, you can observe that the device serial number, signer certificate, and client certificate are all output once to the terminal window.
+
+    <img src=".//media/certs_output.png" width=500 />
+
 13. Access your IoT Central application by signing into the [IoT Central Portal](https://apps.azureiotcentral.com), clicking on `My Apps` in the left-hand side navigation pane, and then clicking on the tile that is labeled with the name of your application.
 
 14. Click [here](./DeviceTemplate_CreatingViews.md) and follow the procedure to create an additional "Properties" view that allows you to read and/or change any of the cloud-writable properties.
