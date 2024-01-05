@@ -60,7 +60,7 @@ uint8_t g_isMqttConnected = MQTT_DISCONNECTED;
 #ifdef RNWF11_SERVICE
 uint8_t g_iothubUsernameCorrected = 0;
 
-/* System Tick Counter for 1mSec*/
+/* System Tick Counter */
 uint32_t g_SysTickCount;
 
 static int16_t g_RebootDelay = -1;
@@ -211,9 +211,6 @@ void APP_AZURE_Task(void)
         if(!(g_SysTickCount % g_ReportRate))
         {
             APP_AZURE_COUNTER_Telemetry(counter++);     //this will continuously trigger telemetry action
-#ifdef _ELIMINATE
-            APP_AZURE_BUTTON_Telemetry(press_count);
-#endif /* _ELIMINATE */
         }
 
         if(g_RebootDelay > 0)
@@ -309,14 +306,12 @@ void APP_AZURE_SUB_Handler(char *p_str)
                 APP_LED_STATE_Handler(atoi(led_ptr));
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
-#ifdef _ELIMINATE
             else
             {
                 sprintf(app_buf, AZURE_FMT_LED0_PROP);
                 APP_LED_STATE_Handler(2);
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
-#endif /* _ELIMINATE */
             if(rate_ptr != NULL)
             {
                 rate_ptr += strlen(AZURE_RATE_TAG);
@@ -327,14 +322,12 @@ void APP_AZURE_SUB_Handler(char *p_str)
                 printf("[PROPERTY] Telemetry report rate = %d sec\r\n", (g_ReportRate/1000));
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
-#ifdef _ELIMINATE
             else
             {
                 sprintf(app_buf, AZURE_FMT_RATE_PROP);
-                printf("Report Rate = %d msec \r\n", g_ReportRate);
+                printf("[PROPERTY] Telemetry report rate = %d msec \r\n", (g_ReportRate/1000));
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
-#endif /* _ELIMINATE */
         }
 #endif
     }

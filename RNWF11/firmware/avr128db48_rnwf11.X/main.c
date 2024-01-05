@@ -103,10 +103,59 @@ int main(void)
 #endif
 
 #ifdef RNWF11_SERVICE
+    // Print out the serial number stored in the ECC
     RNWF_ECC_SrvCtrl(RNWF_ECC_RD_SER, app_buf);
 	char * token = strtok((char *)app_buf, "\"");
     token = strtok(NULL, "\"");
-    printf("\r\nSerial number:- sn%s\n\n", token);
+    printf("\r\nDevice Serial Number = \"sn%s\"\n\n", token);
+#endif
+   
+#ifdef RNWF11_SERVICE               
+    // Print out the Signer certificate stored in the ECC
+    RNWF_ECC_CERT_CFG_t cert_cfg_sig[] = {2, 1500};
+    RNWF_ECC_SrvCtrl(RNWF_ECC_RD_CERT, cert_cfg_sig);
+    printf("\r\n========================================================================\r\n");
+    printf("\r\n \"Trust&GO\" SIGNER Certificate (PEM format)\n");
+    printf("\r\n========================================================================\r\n");
+    for(int i = 1; cert_cfg_sig->cert[i] != '\0'; i++)
+    {
+        if(cert_cfg_sig->cert[i] == '\\' && cert_cfg_sig->cert[++i] == 'n')
+        {
+            printf("\n");
+        }
+        else if (cert_cfg_sig->cert[i] == '"')
+        {
+            printf("\n");            
+        }
+        else
+        {
+            printf("%c",cert_cfg_sig->cert[i]);
+        }
+    }
+    printf("[***PRO-TIP***] Copy the above certificate (including the 'BEGIN' & 'END' lines) and save the contents into a file named \"<MY_SERIAL_NUMBER>_signer.pem\"\n\n");
+
+    // Print out the CLIENT certificate stored in the ECC
+    RNWF_ECC_CERT_CFG_t cert_cfg_dev[] = {1, 1500};
+    RNWF_ECC_SrvCtrl(RNWF_ECC_RD_CERT, cert_cfg_dev);
+    printf("\r\n=======================================================================\r\n");
+    printf("\r\n \"Trust&GO\" CLIENT Certificate (PEM format)\n");
+    printf("\r\n=======================================================================\r\n");
+    for(int i = 1; cert_cfg_dev->cert[i] != '\0'; i++)
+    {
+        if(cert_cfg_dev->cert[i] == '\\' && cert_cfg_dev->cert[++i] == 'n')
+        {
+            printf("\n");
+        }
+        else if (cert_cfg_dev->cert[i] == '"')
+        {
+            printf("\n");            
+        }
+        else
+        {
+            printf("%c",cert_cfg_dev->cert[i]);
+        }
+    }
+    printf("[***PRO-TIP***] Copy the above certificate (including the 'BEGIN' & 'END' lines) and save the contents into a file named \"<MY_SERIAL_NUMBER>_client.pem\"\n\n");
 #endif
 
 	RNWF_APP_Initialize();    // Note: This function call never returns because of an infinite while-loop
