@@ -119,13 +119,11 @@ int main(void)
     printf("\r\n========================================================================\r\n");
     for(int i = 1; cert_cfg_sig->cert[i] != '\0'; i++)
     {
-        if(cert_cfg_sig->cert[i] == '\\' && cert_cfg_sig->cert[++i] == 'n')
+        if ( (cert_cfg_sig->cert[i] == '\\' && cert_cfg_sig->cert[++i] == 'n') ||
+             (cert_cfg_sig->cert[i] == '"')
+           )
         {
-            printf("\n");
-        }
-        else if (cert_cfg_sig->cert[i] == '"')
-        {
-            printf("\n");            
+            printf("\r\n");
         }
         else
         {
@@ -142,13 +140,11 @@ int main(void)
     printf("\r\n=======================================================================\r\n");
     for(int i = 1; cert_cfg_dev->cert[i] != '\0'; i++)
     {
-        if(cert_cfg_dev->cert[i] == '\\' && cert_cfg_dev->cert[++i] == 'n')
+        if ( (cert_cfg_dev->cert[i] == '\\' && cert_cfg_dev->cert[++i] == 'n') || 
+             (cert_cfg_dev->cert[i] == '"')
+           )
         {
-            printf("\n");
-        }
-        else if (cert_cfg_dev->cert[i] == '"')
-        {
-            printf("\n");            
+            printf("\r\n");
         }
         else
         {
