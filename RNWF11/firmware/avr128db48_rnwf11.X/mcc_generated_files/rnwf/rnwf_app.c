@@ -79,8 +79,7 @@ const char *cloud_tls_cfg[] = {"DigiCertGlobalRootG2", NULL, NULL, 0, "*.azure-d
 const char *cloud_tls_cfg[] = {"DigiCertGlobalRootG2", "rnwf02_device_01", "rnwf02_device_01", 0, 0, 0};
 #endif
 RNWF_MQTT_CFG_t mqtt_cfg = {
-    .url = "g2-cert-dps.azure-devices-provisioning.net",
-    //.url = "global.azure-devices-provisioning.net",
+    .url = AZURE_DPS_ENDPOINT,
     .clientid = CLIENT_ID,
     .username = ""AZURE_SCOPE_ID"/registrations/"CLIENT_ID"/api-version=2019-03-31",
     .password = "",
@@ -308,8 +307,8 @@ void APP_AZURE_SUB_Handler(char *p_str)
             }
             else
             {
-                sprintf(app_buf, AZURE_FMT_LED0_PROP);
-                APP_LED_STATE_Handler(2);
+                sprintf(app_buf, AZURE_FMT_LED0_PROP, ver_ptr, PROP_INIT_LED0);
+                APP_LED_STATE_Handler(LED0_STATE_INIT);
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }
             if(rate_ptr != NULL)
@@ -324,7 +323,7 @@ void APP_AZURE_SUB_Handler(char *p_str)
             }
             else
             {
-                sprintf(app_buf, AZURE_FMT_RATE_PROP);
+                sprintf(app_buf, AZURE_FMT_RATE_PROP, ver_ptr, PROP_INIT_RATE);
                 printf("[PROPERTY] Telemetry report rate = %d msec \r\n", (g_ReportRate/1000));
                 APP_MQTT_Publish(AZURE_PUB_PROPERTY, app_buf);
             }

@@ -95,6 +95,7 @@ typedef enum {
 #endif
 
 /* Cloud Configuration */
+#define AZURE_DPS_ENDPOINT      "g2-cert-dps.azure-devices-provisioning.net"
 #define CLIENT_ID               "<YOUR_COMMON_NAME>" // e.g. "sn01237348B762507701"
 #define AZURE_SCOPE_ID          "<YOUR_ID_SCOPE>" // e.g. "0ne00AAE0D0"
 #define AZURE_MODEL_ID          "dtmi:com:Microchip:AVR128DB48_CNANO;1"
@@ -129,6 +130,11 @@ typedef enum {
 #define AZURE_RATE_TAG          "\"reportRate\\\":"
 #define AZURE_DEALY_TAG         "\"delay\\\":\\\"PT"
 #define AZURE_ECHO_TAG          "\"echoString\\\":\\\""
+
+/* Initial values for Properties */
+#define LED0_STATE_INIT 3
+#define PROP_INIT_LED0 "3"
+#define PROP_INIT_RATE "1"
 
 #define CLOUD_STATE_MACHINE()         APP_AZURE_Task() /* Provide app specific implementation for APP_Cloud_Task() */
 
