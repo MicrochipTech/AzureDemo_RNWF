@@ -47,6 +47,9 @@ This page is for advanced users.
 #include <xc.h> // include processor files - each processor file is guarded.  
 
 // TODO Insert appropriate #include <>
+#ifdef RNWF11_SERVICE
+#include "rnwf_app.h"
+#endif
 
 // TODO Insert C++ class definitions if appropriate
 

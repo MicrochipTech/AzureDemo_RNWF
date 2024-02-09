@@ -98,10 +98,11 @@ typedef enum {
 #define AZURE_DPS_ENDPOINT      "g2-cert-dps.azure-devices-provisioning.net"
 #define CLIENT_ID               "<YOUR_COMMON_NAME>" // e.g. "sn01237348B762507701"
 #define AZURE_SCOPE_ID          "<YOUR_ID_SCOPE>" // e.g. "0ne00AAE0D0"
-#define AZURE_MODEL_ID          "dtmi:com:Microchip:AVR128DB48_CNANO;1"
 #define AZURE_PUB_TELEMETRY     "devices/"CLIENT_ID"/messages/events/"
 
 #ifdef RNWF11_SERVICE
+#define AZURE_MODEL_ID          "dtmi:com:Microchip:AVR128DB48_CNANO;1"
+
 #define RNWF_TLS_USE_ECC608 1
 #define RNWF_TLS_ECC608_DEVTYPE 1   //1-TNG 2-TFlex
 #endif
